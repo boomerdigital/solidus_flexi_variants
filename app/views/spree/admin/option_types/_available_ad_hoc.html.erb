@@ -14,7 +14,7 @@
         <tr>
           <td><%= available_option_type.name %></td>
           <td><%= available_option_type.presentation %></td>
-          <td class="actions"><%= link_to_with_icon 'add', '', url_for(
+          <td class="actions"><%= link_to_with_icon 'plus', '', url_for(
             controller: "admin/option_types",
             id: available_option_type,
             product_id: @product.slug,

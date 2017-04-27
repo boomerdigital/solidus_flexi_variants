@@ -28,9 +28,6 @@ Spree::Core::Engine.routes.draw do
           post :update_positions
         end
       end
-      member do
-        get :remove
-      end
     end
 
     delete '/ad_hoc_option_values/:id', to: "ad_hoc_option_values#destroy", as: :ad_hoc_option_value

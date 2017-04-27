@@ -8,7 +8,6 @@
   <td class='cost_price_modifier'><%= f.text_field :cost_price_modifier, class: 'form-control' %></td>
   <td class='selected'><%= f.check_box :selected, class: 'form-control' %></td>
   <td class="actions actions-1 text-right">
-    <%= link_to_with_icon('delete', '', admin_ad_hoc_option_value_path(f.object), method: :delete, class: "btn btn-danger btn-sm"
-      ) %>
+    <%= link_to_delete f.object, no_text: true %>
   </td>
 </tr>
