@@ -1,6 +1,6 @@
-module SpreeFlexiVariants
+module SolidusFlexiVariants
   class Engine < Rails::Engine
-    engine_name 'spree_flexi_variants'
+    engine_name 'solidus_flexi_variants'
 
     config.autoload_paths += %W(#{config.root}/lib)
 
@@ -22,22 +22,22 @@ module SpreeFlexiVariants
     config.to_prepare &method(:activate).to_proc
 
     initializer "spree.flexi_variants.preferences", after: "spree.environment" do |app|
-      SpreeFlexiVariants::Config = Spree::FlexiVariantsConfiguration.new
+      SolidusFlexiVariants::Config = Spree::FlexiVariantsConfiguration.new
     end
 
     initializer "spree.flexi_variants.assets.precompile" do |app|
-        app.config.assets.precompile += ['spree/frontend/spree_flexi_variants_exclusions.js','spree/backend/orders/flexi_configuration.js'] # ,'spree/frontend/spree-flexi-variants.*' # removed for now until we need the styles
+        app.config.assets.precompile += ['spree/frontend/solidus_flexi_variants_exclusions.js','spree/backend/orders/flexi_configuration.js'] # ,'spree/frontend/spree-flexi-variants.*' # removed for now until we need the styles
     end
 
     initializer "spree.flexi_variants.register.calculators" do |app|
       app.config.spree.calculators.add_class('product_customization_types') unless app.config.spree.calculators.respond_to?(:product_customization_types)
-      app.config.spree.calculators.product_customization_types += [
+      app.config.spree.calculators.product_customization_types.concat([
                                                                     Spree::Calculator::Engraving,
                                                                     Spree::Calculator::AmountTimesConstant,
                                                                     Spree::Calculator::ProductArea,
                                                                     Spree::Calculator::CustomizationImage,
                                                                     Spree::Calculator::NoCharge
-                                                                   ]
+                                                                   ])
     end
   end
 end

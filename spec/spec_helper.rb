@@ -16,7 +16,7 @@ require 'pry'
 # in spec/support/ and its subdirectories.
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
 
-require 'spree_flexi_variants/factories'
+require 'solidus_flexi_variants/factories'
 
 RSpec.configure do |config|
 

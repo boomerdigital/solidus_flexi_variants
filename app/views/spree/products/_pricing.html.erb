@@ -1,4 +1,4 @@
-<% if SpreeFlexiVariants::Config[:use_javascript_pricing_updates] %>
+<% if SolidusFlexiVariants::Config[:use_javascript_pricing_updates] %>
   <%= content_for :flexi_variants_body_js do %>
     <%# didn't use javascript_tag here so we don't confuse deface %>
     <script type="text/javascript">
@@ -129,5 +129,5 @@
     //]]>
     </script>
   <% end %>
-<%# end if SpreeFlexiVariants::Config[:use_javascript_pricing_updates] %>
+<%# end if SolidusFlexiVariants::Config[:use_javascript_pricing_updates] %>
 <% end %>

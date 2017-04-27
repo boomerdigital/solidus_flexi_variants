@@ -1,4 +1,4 @@
-#SpreeFlexiVariants
+#SolidusFlexiVariants
 
 For Spree 3.2.0+
 
@@ -20,29 +20,29 @@ The branch spree-3-1-experimental is an untested by myself version for spree 3.1
 
 The branch spree-3-0-stable is an somewhat stable version for spree 3.0.0 with updated styles to match.
 
-Working with a older spree? Check out the original gem or one of the many forks. https://github.com/jsqu99/spree_flexi_variants
+Working with a older spree? Check out the original gem or one of the many forks. https://github.com/jsqu99/solidus_flexi_variants
 
 ##Installation
 
     # see the notes in Versionfile if you are using an older version of spree
-    gem 'spree_flexi_variants', github: 'QuintinAdam/spree_flexi_variants', branch: '3-0-stable'
+    gem 'solidus_flexi_variants', github: 'QuintinAdam/solidus_flexi_variants', branch: '3-0-stable'
 
     bundle install
 
-    bundle exec rails g spree_flexi_variants:install
+    bundle exec rails g solidus_flexi_variants:install
 
 ## Examples
 
 Build a 'Cake' product using **Ad Hoc Options** and **Product Customizations**
 
-![Cake](https://raw.github.com/QuintinAdam/spree_flexi_variants/master/doc/custom_cake.png)
+![Cake](https://raw.github.com/QuintinAdam/solidus_flexi_variants/master/doc/custom_cake.png)
 
 Build a 'Necklace'  product using **Ad Hoc Options** and **Product Customizations**
 
-![Necklace](https://raw.github.com/jsqu99/spree_flexi_variants/master/doc/necklace_screenshot.png)
+![Necklace](https://raw.github.com/jsqu99/solidus_flexi_variants/master/doc/necklace_screenshot.png)
 
 Build a 'Pizza' product using **Ad Hoc Options**. Note that the 'multi' option checkboxes come from a partial named after the option name (see app/views/products/ad_hoc_options/_toppings.html.erb)
 
-![Picture Frame](https://raw.github.com/jsqu99/spree_flexi_variants/master/doc/pizza_screenshot.png)
+![Picture Frame](https://raw.github.com/jsqu99/solidus_flexi_variants/master/doc/pizza_screenshot.png)
 
-See the [wiki](https://github.com/jsqu99/spree_flexi_variants/wiki) for more detail.
+See the [wiki](https://github.com/jsqu99/solidus_flexi_variants/wiki) for more detail.

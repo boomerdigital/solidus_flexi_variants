@@ -18,7 +18,7 @@
   <% end %>
 <% end %>
 
-<%= render 'spree/admin/shared/error_messages', target: @product_customization_type %>
+<%= render 'spree/shared/error_messages', target: @product_customization_type %>
 
 <%= form_for(@product_customization_type, url: admin_product_customization_type_url(@product_customization_type), html: { method: :put }) do |f| %>
   <fieldset>

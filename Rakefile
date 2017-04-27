@@ -10,6 +10,6 @@ task default: [:spec]
 
 desc 'Generates a dummy app for testing'
 task :test_app do
-  ENV['LIB_NAME'] = 'spree_flexi_variants'
+  ENV['LIB_NAME'] = 'solidus_flexi_variants'
   Rake::Task['common:test_app'].invoke 'Spree::User'
 end

@@ -2,7 +2,7 @@
   <%=Spree.t(:new_product_customization_type) %>
 <% end %>
 
-<%= render 'spree/admin/shared/error_messages', target: @product_customization_type  %>
+<%= render 'spree/shared/error_messages', target: @product_customization_type  %>
 
 <%= form_for(@product_customization_type, url: admin_product_customization_types_url) do |f| %>
   <fieldset>
