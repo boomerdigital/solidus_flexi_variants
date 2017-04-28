@@ -23,8 +23,6 @@ Spree::Core::Engine.routes.draw do
 
     delete '/ad_hoc_option_values/:id', to: "ad_hoc_option_values#destroy", as: :ad_hoc_option_value
 
-    resources :ad_hoc_variant_exclusions
-
     resources :products do
 
       resources :ad_hoc_option_types, except: [:show] do
@@ -41,7 +39,7 @@ Spree::Core::Engine.routes.draw do
         end
       end
 
-      resources :ad_hoc_variant_exclusions
+      resources :ad_hoc_variant_exclusions, except: [:edit, :update]
 
       resources :product_customization_types do
         member do
