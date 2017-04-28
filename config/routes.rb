@@ -34,7 +34,7 @@ Spree::Core::Engine.routes.draw do
           post :select
         end
 
-        resources :ad_hoc_option_values do
+        resources :ad_hoc_option_values, only: [:destroy] do
           collection do
             post :update_positions
           end
