@@ -2,6 +2,10 @@ FactoryGirl.define do
   factory :product_customization, class: Spree::ProductCustomization do
     product_customization_type
     line_item
+
+    after(:create) do |pc|
+      create(:customized_product_option, product_customization: pc)
+    end
   end
 
   factory :customized_product_option, class: Spree::CustomizedProductOption do
