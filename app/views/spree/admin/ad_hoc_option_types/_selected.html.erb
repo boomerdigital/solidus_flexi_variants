@@ -33,6 +33,6 @@
 <% else %>
   <div class="alert alert-info no-objects-found">
     <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::AdHocOptionType)) %>,
-    <%= link_to Spree.t(:add_one), spree.available_ad_hoc_admin_product_option_types_url(@product), remote: :true %>!
+    <%= link_to Spree.t(:add_one), spree.admin_product_ad_hoc_option_types_path(@product), remote: :true %>!
   </div>
 <% end %>

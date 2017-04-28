@@ -4,24 +4,7 @@ Spree::Core::Engine.routes.draw do
   match 'customize/:product_id', to: 'products#customize', as: 'customize', via: [:get, :post]
 
   namespace :admin do
-
-    resources :product_customization_types do
-      resources :customizable_product_options do
-        member do
-          get :select
-          post :select
-          get :remove
-        end
-        collection do
-          get :available
-          get :selected
-        end
-      end
-    end
-
-    resources :product_customization_types
-
-    delete '/ad_hoc_option_values/:id', to: "ad_hoc_option_values#destroy", as: :ad_hoc_option_value
+    resources :product_customization_types, only: [:index, :new, :create, :edit, :update, :destroy]
 
     resources :products do
 
@@ -41,15 +24,16 @@ Spree::Core::Engine.routes.draw do
 
       resources :ad_hoc_variant_exclusions, except: [:edit, :update]
 
-      resources :product_customization_types do
+      resources :product_customization_types, except: [:index] do
         member do
           get :select
           post :select
           get :remove
         end
+
         collection do
-          get :available
           get :selected
+          get :available
         end
       end
     end #products

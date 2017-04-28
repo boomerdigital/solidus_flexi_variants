@@ -8,6 +8,6 @@
 <% end if can?(:admin, Spree::Product) %>
 
 <%= content_tag :li, class: ('active' if current == 'Product Customization Types') do %>
-  <%= link_to_with_icon  'list-alt', Spree.t(:product_customization_types), spree.selected_admin_product_product_customization_types_url(@product) %>
+  <%= link_to Spree.t(:product_customization_types), spree.selected_admin_product_product_customization_types_url(@product) %>
 <% end if can?(:admin, Spree::Product) %>
 
