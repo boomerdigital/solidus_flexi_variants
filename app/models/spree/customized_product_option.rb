@@ -8,7 +8,7 @@ module Spree
     mount_uploader :customization_image, CustomizationImageUploader
 
     def empty?
-      value.empty? && !customization_image?
+      value.blank? && !customization_image?
     end
   end
 end
