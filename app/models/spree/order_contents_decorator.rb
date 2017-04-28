@@ -11,11 +11,10 @@ Spree::OrderContents.class_eval do
       variant: variant,
       currency: order.currency
     )
-
     line_item.quantity += quantity.to_i
-    line_item.options = ActionController::Parameters.new(options).permit(PermittedAttributes.line_item_attributes).to_h
-    # Options are not being added
-    unless line_item
+    line_item.options = ActionController::Parameters.new(options).permit(Spree::PermittedAttributes.line_item_attributes).to_h
+
+    unless options.empty?
       product_customizations_values = options[:product_customizations] || []
       line_item.product_customizations = product_customizations_values
       product_customizations_values.each { |product_customization| product_customization.line_item = line_item }
@@ -25,7 +24,7 @@ Spree::OrderContents.class_eval do
       # we postponed it (performance reasons) until we actually know we needed them
       ad_hoc_option_value_ids = ( !!options[:ad_hoc_option_values] ? options[:ad_hoc_option_values] : [] )
       product_option_values = ad_hoc_option_value_ids.map do |cid|
-        AdHocOptionValue.find(cid) if cid.present?
+        Spree::AdHocOptionValue.find(cid) if cid.present?
       end.compact
       line_item.ad_hoc_option_values = product_option_values
 
