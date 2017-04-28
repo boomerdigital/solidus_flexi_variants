@@ -5,7 +5,6 @@ Spree::Core::Engine.routes.draw do
 
   namespace :admin do
 
-    # resources :configuration_exclusions
     resources :product_customization_types do
       resources :customizable_product_options do
         member do
@@ -22,38 +21,23 @@ Spree::Core::Engine.routes.draw do
 
     resources :product_customization_types
 
-    resources :ad_hoc_option_types do
-      resources :ad_hoc_option_values do
-        collection do
-          post :update_positions
-        end
-      end
-    end
-
     delete '/ad_hoc_option_values/:id', to: "ad_hoc_option_values#destroy", as: :ad_hoc_option_value
 
     resources :ad_hoc_variant_exclusions
 
     resources :products do
-      resources :option_types do
-        member do
-          get :select
-          get :remove
-          get :select_ad_hoc
-          post :select_ad_hoc
-        end
-        collection do
-          get :available
-          get :selected
-          get :available_ad_hoc
-        end
-      end
-      resources :ad_hoc_option_types do
-        collection do
-          get :selected
-        end
+
+      resources :ad_hoc_option_types, except: [:show] do
         member do
           get :add_option_value
+          get :select
+          post :select
+        end
+
+        resources :ad_hoc_option_values do
+          collection do
+            post :update_positions
+          end
         end
       end
 

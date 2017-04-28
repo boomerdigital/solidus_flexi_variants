@@ -51,6 +51,6 @@
 <% else %>
   <div class="alert alert-info no-objects-found">
     <%=Spree.t(:ad_hoc_variant_exclusions_unavailable) %>,
-    <%= link_to Spree.t(:add_one), spree.selected_admin_product_ad_hoc_option_types_url(@product) %>!
+    <%= link_to Spree.t(:add_one), spree.admin_product_ad_hoc_option_types_url(@product) %>!
   </div>
 <% end %>

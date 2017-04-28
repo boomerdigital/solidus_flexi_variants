@@ -1,0 +1,18 @@
+<%= render partial: 'spree/admin/shared/product_tabs', locals: {current: "Ad Hoc Option Types"} %>
+<% admin_breadcrumb(plural_resource_name(Spree::AdHocOptionType)) %>
+
+<% content_for :page_actions do %>
+  <% if can?(:edit, Spree::Product) %>
+    <li id="new_ahot_link">
+      <%= button_link_to Spree.t(:add_ad_hoc_option_type), new_admin_product_ad_hoc_option_type_path(@product), { remote: :true } %>
+    </li>
+  <% end %>
+<% end %>
+
+<div id="selected-options">
+  <%= render 'selected' %>
+</div>
+
+
+<div id="option-types"></div>
+<span id="new_opt_link"></span>
