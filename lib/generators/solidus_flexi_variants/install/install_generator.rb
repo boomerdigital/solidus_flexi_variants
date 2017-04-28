@@ -7,11 +7,6 @@ module SolidusFlexiVariants
         append_file "vendor/assets/javascripts/spree/backend/all.js", "//= require spree/backend/solidus_flexi_variants\n"
       end
 
-      # def add_stylesheets
-        # inject_into_file 'vendor/assets/stylesheets/spree/frontend/all.css', " *= require spree/frontend/solidus_flexi_variants\n", before: /\*\//, verbose: true
-        # inject_into_file 'vendor/assets/stylesheets/spree/backend/all.css', " *= require spree/backend/solidus_flexi_variants\n", before: /\*\//, verbose: true
-      # end
-
       def add_migrations
         run 'bundle exec rake railties:install:migrations FROM=solidus_flexi_variants'
       end
