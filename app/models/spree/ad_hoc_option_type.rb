@@ -13,6 +13,7 @@ module Spree
 
     # price_modifier_type
     # is_required
+    # TODO What is this all about?
     def has_price_modifier?
       !(price_modifier_type.nil? || price_modifier_type.downcase=~/none/)
     end

@@ -55,8 +55,6 @@ module Spree
     end
 
     def edit
-      # Is this an edit immediately after create?  If so, need to create
-      # calculator-appropriate default options
       if @product_customization_type.customizable_product_options.empty?
         if !@product_customization_type.calculator.nil?
 

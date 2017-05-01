@@ -4,7 +4,7 @@ module Spree
     has_many :ad_hoc_option_values, through: :ad_hoc_option_values_line_items
     has_many :product_customizations, dependent: :destroy
 
-    def options_text
+    def options_text # REFACTOR
       str = Array.new
       unless self.ad_hoc_option_values.empty?
 

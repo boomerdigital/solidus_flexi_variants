@@ -3,7 +3,6 @@ require_dependency 'spree/calculator'
 module Spree
   class Calculator::Engraving < Calculator
     preference :price_per_letter, :decimal
-    #attr_accessible :preferred_price_per_letter
 
     def self.description
       "Engraving Calculator"
@@ -24,8 +23,8 @@ module Spree
     def compute(product_customization, variant=nil)
       return 0 unless valid_configuration? product_customization
 
-      # expecting only one CustomizedProductOption
       opt = product_customization.customized_product_options.detect {|cpo| cpo.customizable_product_option.name == "inscription" } rescue ''
+      # The rescue will make the next line raise an error, is that what we want?
       opt.value.length * (preferred_price_per_letter || 0)
     end
 
