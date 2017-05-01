@@ -28,7 +28,7 @@ module Spree
           flash[:error] = 'Error Deleting Ad Hoc Variant Exclusion'
         end
 
-        respond_with(@variant) do |format|
+        respond_to do |format|
           format.html { redirect_to admin_product_ad_hoc_variant_exclusions_path(@product) }
           format.js { render_js_for_destroy }
         end

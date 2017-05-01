@@ -78,6 +78,10 @@ module Spree
       @product = Product.friendly.find(params[:product_id])
     end
 
+    def location_after_save
+      edit_admin_product_customization_type_path(@product_customization_type)
+    end
+
     def set_available_product_customization_types
       @available_product_customization_types = ProductCustomizationType.all.to_a
       selected_product_customization_types = []
