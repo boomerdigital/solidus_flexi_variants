@@ -15,6 +15,7 @@ Use these when you want the ability to provide a highly customized product e.g. 
 ##Version Notes
 
 TODO
+I have only tested with V2.0, unsure if compatible with other versions as of yet.
 
 ##Installation
 
