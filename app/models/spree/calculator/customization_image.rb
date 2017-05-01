@@ -21,8 +21,6 @@ module Spree
     end
 
     def compute(product_customization,variant=nil)
-      return 0 unless valid_configuration? product_customization
-
       # expecting only one CustomizedProductOption
       opt = product_customization.customized_product_options.detect {|cpo| cpo.customizable_product_option.name == "customization_image" } rescue ''
 
@@ -31,10 +29,6 @@ module Spree
       else
         0.00   # no image was uploaded
       end
-    end
-
-    def valid_configuration?(product_customization)
-      true
     end
   end
 end

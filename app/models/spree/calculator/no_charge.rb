@@ -20,9 +20,5 @@ module Spree
     def compute(product_customization, variant=nil)
       return 0
     end
-
-    def valid_configuration?(product_customization)
-      true
-    end
   end
 end
