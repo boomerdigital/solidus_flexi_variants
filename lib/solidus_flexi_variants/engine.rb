@@ -25,6 +25,11 @@ module SolidusFlexiVariants
       SolidusFlexiVariants::Config = Spree::FlexiVariantsConfiguration.new
     end
 
+    initializer "spree.flexi_variants.register.line_item_comparision_hooks" do |app|
+      Spree::Order.register_line_item_comparison_hook(:product_customizations_match)
+      Spree::Order.register_line_item_comparison_hook(:ad_hoc_option_values_match)
+    end
+
     initializer "spree.flexi_variants.assets.precompile" do |app|
         app.config.assets.precompile += ['spree/frontend/solidus_flexi_variants_exclusions.js','spree/backend/orders/flexi_configuration.js'] # ,'spree/frontend/spree-flexi-variants.*' # removed for now until we need the styles
     end

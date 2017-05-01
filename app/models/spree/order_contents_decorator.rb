@@ -22,7 +22,7 @@ Spree::OrderContents.class_eval do
 
       # find, and add the configurations, if any.  these have not been fetched from the db yet.              line_items.first.variant_id
       # we postponed it (performance reasons) until we actually know we needed them
-      ad_hoc_option_value_ids = ( !!options[:ad_hoc_option_values] ? options[:ad_hoc_option_values] : [] )
+      ad_hoc_option_value_ids = ( options[:ad_hoc_option_values].any? ? options[:ad_hoc_option_values] : [] )
       product_option_values = ad_hoc_option_value_ids.map do |cid|
         Spree::AdHocOptionValue.find(cid) if cid.present?
       end.compact
