@@ -16,11 +16,10 @@ module Spree
 
       def add_option_value
         ad_hoc_option_value = @ad_hoc_option_type.ad_hoc_option_values.new(option_value_id: params[:option_value_id])
-
-        if ad_hoc_option_value.save!
+        if ad_hoc_option_value.save
           flash[:success] = 'Ad Hoc Option Value Created'
         else
-          invalid_resource!(ad_hoc_option_value)
+          flash[:error] = 'Error Creating Ad Hoc Option Value'
         end
 
         redirect_to edit_admin_product_ad_hoc_option_type_url(@ad_hoc_option_type.product, @ad_hoc_option_type)
@@ -36,7 +35,7 @@ module Spree
           flash[:error] = 'Error Deleting Ad Hoc Option Type'
         end
 
-        respond_with(@variant) do |format|
+        respond_to do |format|
           format.html { redirect_to admin_product_ad_hoc_option_types_url(@product) }
           format.js { render_js_for_destroy }
         end

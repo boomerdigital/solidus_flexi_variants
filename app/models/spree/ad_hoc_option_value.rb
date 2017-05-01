@@ -5,6 +5,8 @@ module Spree
     belongs_to :option_value
     has_many :excluded_ad_hoc_option_values, dependent: :destroy
 
+    validates :option_value, presence: true
+
     # currently no controller for normal users present
     #attr_accessible :price_modifier, :ad_hoc_option_type_id, :option_value_id, :selected, :cost_price_modifier
 
