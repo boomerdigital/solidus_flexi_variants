@@ -23,7 +23,7 @@
   </table>
 <% else %>
   <div class="alert alert-info no-objects-found">
-    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::ProductCustomization)) %>,
+    <%= Spree.t(:no_resource, resource: Spree::ProductCustomization.model_name.human(count: :other)) %>,
     <%= link_to Spree.t(:add_one), spree.available_admin_product_product_customization_types_url(@product), remote: :true %>!
   </div>
 <% end %>

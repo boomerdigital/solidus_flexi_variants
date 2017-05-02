@@ -1,5 +1,4 @@
 <%= render partial: 'spree/admin/shared/product_tabs', locals: { current: "Ad Hoc Variant Exclusions" } %>
-<% admin_breadcrumb(plural_resource_name(Spree::AdHocVariantExclusion)) %>
 
 <h3><%= Spree.t("ad_hoc_variant_exclusions") %></h3>
 
@@ -45,7 +44,7 @@
     </table>
   <% else %>
     <div class="alert alert-info no-objects-found">
-      <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::AdHocVariantExclusion)) %>,
+      <%= Spree.t(:no_resource, resource: Spree::AdHocVariantExclusion.model_name.human(count: :other)) %>,
       <%= link_to Spree.t(:add_one), spree.new_admin_product_ad_hoc_variant_exclusion_url(@product), remote: true %>!
     </div>
   <% end %>
