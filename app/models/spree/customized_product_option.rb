@@ -10,5 +10,13 @@ module Spree
     def empty?
       value.blank? && !customization_image?
     end
+
+    def display_text
+      if customization_image?
+        "#{customizable_product_option.presentation} = #{File.basename customization_image.url}"
+      else
+        "#{customizable_product_option.presentation} = #{value}"
+      end
+    end
   end
 end

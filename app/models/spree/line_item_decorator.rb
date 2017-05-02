@@ -5,32 +5,25 @@ module Spree
     has_many :product_customizations, dependent: :destroy
 
     def options_text # REFACTOR
-      str = Array.new
-      unless self.ad_hoc_option_values.empty?
+      if customized?
+        str = Array.new
 
-        #TODO: group multi-select options (e.g. toppings)
-        str << self.ad_hoc_option_values.each { |pov|
-          "#{pov.option_value.option_type.presentation} = #{pov.option_value.presentation}"
-        }.join(',')
-      end # unless empty?
+        ad_hoc_opt_values = ad_hoc_option_values.sort_by(&:position)
+        ad_hoc_option_values.sort_by(&:position).each do |pov|
+          str << "#{pov.option_value.option_type.presentation} = #{pov.option_value.presentation}"
+        end
 
-      unless self.product_customizations.empty?
-        self.product_customizations.each do |customization|
+        product_customizations.each do |customization|
           price_adjustment = (customization.price == 0) ? "" : " (#{Spree::Money.new(customization.price).to_s})"
-          str << "#{customization.product_customization_type.presentation}#{price_adjustment}"
-          customization.customized_product_options.each do |option|
-            next if option.empty?
+          customization_type_text = "#{customization.product_customization_type.presentation}#{price_adjustment}"
+          opts_text = customization.customized_product_options.map { |opt| opt.display_text }.join(', ')
+          str << customization_type_text + ": #{opts_text}"
+        end
 
-            if option.customization_image?
-              str << "#{option.customizable_product_option.presentation} = #{File.basename option.customization_image.url}"
-            else
-              str << "#{option.customizable_product_option.presentation} = #{option.value}"
-            end
-          end # each option
-        end # each customization
-      end # unless empty?
-
-      str.join('\n')
+        str.join('\n')
+      else
+        variant.options_text
+      end
     end
 
     def customized?
