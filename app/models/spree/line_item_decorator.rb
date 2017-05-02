@@ -33,6 +33,10 @@ module Spree
       str.join('\n')
     end
 
+    def customized?
+      product_customizations.present? || ad_hoc_option_values.present?
+    end
+
     def cost_price
       (variant.cost_price || 0) + ad_hoc_option_values.map(&:cost_price).inject(0, :+)
     end
