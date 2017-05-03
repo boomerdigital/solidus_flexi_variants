@@ -2,14 +2,14 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'solidus_flexi_variants'
   s.version     = '1.0.0'
-  s.summary     = 'This is a spree extension that solves two use cases related to variants.'
-  s.description = 'Spree extension to create product variants as-needed'
+  s.summary     = 'This is a solidus extension that solves two use cases related to variants.'
+  s.description = 'Solidus extension to create product variants as-needed'
   s.required_ruby_version = '>= 2.1'
 
   # s.original_author            = 'Jeff Squires'
   s.authors            = ['Quintin Adam', 'Allison Reilly']
   s.email             = 'acreilly3@gmail.com'
-  s.homepage          = 'https://github.com/QuintinAdam/solidus_flexi_variants'
+  s.homepage          = 'https://github.com/boomerdigital/solidus_flexi_variants'
 
   s.files       = `git ls-files`.split("\n")
   s.test_files  = `git ls-files -- {spec}/*`.split("\n")
