@@ -24,13 +24,15 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'rspec-rails', '~> 3.2'
   s.add_development_dependency 'capybara'#,           '~> 2.1'
+  s.add_development_dependency "capybara-screenshot"
+  s.add_development_dependency 'capybara-accessible'
   s.add_development_dependency 'coffee-rails'
   s.add_development_dependency 'coveralls'
   s.add_development_dependency 'database_cleaner'#,   '~> 1.0.1'
   s.add_development_dependency 'factory_girl'
   s.add_development_dependency 'ffaker'
   s.add_development_dependency 'sass-rails'
-  s.add_development_dependency 'selenium-webdriver'
+  s.add_development_dependency 'selenium-webdriver', "~> 2.53.4"
   s.add_development_dependency 'shoulda-matchers', '~> 2.7'
   s.add_development_dependency 'simplecov'#, '~> 0.9.0'
   s.add_development_dependency 'sqlite3'

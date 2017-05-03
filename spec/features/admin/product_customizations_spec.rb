@@ -24,14 +24,16 @@ describe 'Product Customizations', js: true do
       go_to_product_page
       go_to_product_customization
 
-      click_on('Add Product Customization Type')
-      find('.icon.icon-add').click
+      click_on('Add One')
+      wait_for_ajax
+      expect(all('#available_product_customization_types tbody tr').length).to eq(1)
+      find('.fa.fa-plus.icon_link', match: :first).click
       expect(all('#selected-customization-types tbody tr').length).to eq(1)
-
       #test remove
-      find('.icon.icon-delete').click
+      find('.fa.fa-trash').click
+
       expect(page).to have_content('Product Customization Type Removed')
-      expect(page).to have_content('No Product customization found, Add One!')
+      expect(page).to have_content('No Product customization found')
     end
 
   end

@@ -13,26 +13,21 @@ module IntegrationHelpers
   end
 
   def go_to_product_page
-    visit '/admin'
-    click_on 'Products'
-    expect(find('#sidebar-product').visible?).to eq(true)
-    within("#sidebar-product") do
-      click_on("Products")
-    end
-    within('.content-header') do
+    visit spree.admin_products_path
+    within('#content-header') do
       expect(page).to have_content('Products')
     end
     click_on 'Test Product'
-    within('.content-header') do
-      expect(page).to have_content('Products / Test Product')
+    within('#content-header') do
+      expect(page).to have_content('Test Product')
     end
   end
 
   def go_to_edit_ad_hoc_option_type
     click_on 'Ad Hoc Option Types'
     expect(page).to have_content('Add Option Types')
-    find('.btn-primary .icon.icon-edit').click
-    expect(page).to have_content('Editing Option Type')
+    find('.fa.fa-edit').click
+    expect(page).to have_content('Option Values')
   end
 
   def go_to_ad_hoc_variant_exclusions
@@ -45,5 +40,18 @@ module IntegrationHelpers
     expect(page).to have_content('Ad Hoc Variant Exclusions')
     find('.btn-primary .icon.icon-edit').click
     expect(page).to have_content('Editing Option Type')
+  end
+
+  def accept_alert
+    page.driver.browser.switch_to.alert.accept
+  end
+
+  def wait_for_ajax
+    Timeout.timeout(Capybara.default_wait_time) do
+      loop do
+        active = page.evaluate_script('jQuery.active')
+        break if active == 0
+      end
+    end
   end
 end
