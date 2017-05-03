@@ -7,7 +7,9 @@ RSpec.describe Spree::Admin::AdHocOptionValuesController, type: :controller do
 
   describe '#destroy' do
     let!(:ad_hoc_option_value) { create(:ad_hoc_option_value) }
-    let(:params) { { id: ad_hoc_option_value.id } }
+    let(:ad_hoc_option_type) { ad_hoc_option_value.option_type }
+    let(:product) { ad_hoc_option_type.product }
+    let(:params) { { product_id: product.slug, ad_hoc_option_type_id: ad_hoc_option_type.id, id: ad_hoc_option_value.id } }
 
     subject {
       delete :destroy, params: params
