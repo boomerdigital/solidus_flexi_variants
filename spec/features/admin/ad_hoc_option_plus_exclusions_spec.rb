@@ -21,7 +21,7 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', js: true do
 
       accept_alert
 
-      expect(page).to_not have_content('No route matches')
+      expect(page).to_not have_content(/No route matches/i)
 
       expect(all('#option_values tr').length).to eq(2)
 
@@ -35,6 +35,8 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', js: true do
         find('.fa.fa-plus', match: :first).click
       end
 
+      wait_for_ajax
+
       expect(all('#option_values tr').length).to eq(3)
 
       #check the update
@@ -44,20 +46,22 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', js: true do
         check 'ad_hoc_option_type_ad_hoc_option_values_attributes_0_selected'
       end
       click_on('Update')
-      expect(page).to have_content('Ad hoc option type "color" has been successfully updated!')
-      find('.fa.fa-edit', match: :first).click
+      expect(page).to have_content(/Ad hoc option type "color" has been successfully updated!/i)
+      find('#ad_hoc_option_types .fa.fa-edit', match: :first).click
+
+
       expect find('#ad_hoc_option_type_is_required').should be_checked
       within('#spree_ad_hoc_option_value_2') do
         expect(page).to have_selector("input[value='1.0']")
         expect find('#ad_hoc_option_type_ad_hoc_option_values_attributes_0_selected').should be_checked
       end
       click_on('Cancel')
-      expect(page).to have_content('Add Option Types')
+      expect(page).to have_content(/Add Option Types/i)
       #test deleting a option type
       find('.fa.fa-trash').click
 
       accept_alert
-      expect(page).to have_content('Ad Hoc Option Type Deleted')
+      expect(page).to have_content(/Ad Hoc Option Type Deleted/i)
       expect(all('#ad_hoc_option_types tbody tr').length).to eq(0)
 
       #test adding an option type
@@ -72,11 +76,11 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', js: true do
       setup_option_types_plus_ad_hoc_option_type
       go_to_product_page
       go_to_ad_hoc_variant_exclusions
-      expect(page).to have_content('You only need to configure exclusions when you have more than one ad hoc option type')
+      expect(page).to have_content(/You only need to configure exclusions when you have more than one ad hoc option type/i)
       setup_option_types_plus_ad_hoc_option_type_number_two
       go_to_product_page
       go_to_ad_hoc_variant_exclusions
-      expect(page).to have_content('No Ad hoc variant exclusion found')
+      expect(page).to have_content(/No Ad hoc variant exclusion found/i)
       click_on('Add One')
       select "red", from: 'ad_hoc_option_type_1'
       select "small", from: 'ad_hoc_option_type_2'
@@ -86,7 +90,7 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', js: true do
 
       accept_alert
 
-      expect(page).to have_content('Exclusion Removed')
+      expect(page).to have_content(/Exclusion Removed/i)
     end
 
     def setup_option_types_plus_ad_hoc_option_type

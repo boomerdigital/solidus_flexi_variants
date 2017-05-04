@@ -16,7 +16,7 @@ describe 'Product Customizations', js: true do
 
     def go_to_product_customization
       click_on('Customization Types')
-      expect(page).to have_content('Add Product Customization Type')
+      expect(page).to have_content(/Add Product Customization Type/i)
     end
 
     it 'product customization add/remove existing customization types' do
@@ -32,8 +32,8 @@ describe 'Product Customizations', js: true do
       #test remove
       find('.fa.fa-trash').click
 
-      expect(page).to have_content('Product Customization Type Removed')
-      expect(page).to have_content('No Product customization found')
+      expect(page).to have_content(/Product Customization Type Removed/i)
+      expect(page).to have_content(/No Product customization found/i)
     end
 
   end

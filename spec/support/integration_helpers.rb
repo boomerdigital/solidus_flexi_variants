@@ -15,31 +15,31 @@ module IntegrationHelpers
   def go_to_product_page
     visit spree.admin_products_path
     within('#content-header') do
-      expect(page).to have_content('Products')
+      expect(page).to have_content(/Products/i)
     end
     click_on 'Test Product'
     within('#content-header') do
-      expect(page).to have_content('Test Product')
+      expect(page).to have_content(/Test Product/i)
     end
   end
 
   def go_to_edit_ad_hoc_option_type
     click_on 'Ad Hoc Option Types'
-    expect(page).to have_content('Add Option Types')
-    find('.fa.fa-edit', match: :first).click
-    expect(page).to have_content('Option Values')
+    expect(page).to have_content(/Add Option Types/i)
+    find('.actions .fa.fa-edit', match: :first).click
+    expect(page).to have_content(/Option Values/i)
   end
 
   def go_to_ad_hoc_variant_exclusions
     click_on 'Ad Hoc Variant Exclusions'
-    expect(page).to have_content('Ad Hoc Variant Exclusions')
+    expect(page).to have_content(/Ad Hoc Variant Exclusions/i)
   end
 
   def go_to_edit_ad_hoc_variant_exclusions
     click_on 'Ad Hoc Variant Exclusions'
-    expect(page).to have_content('Ad Hoc Variant Exclusions')
+    expect(page).to have_content(/Ad Hoc Variant Exclusions/i)
     find('.btn-primary .icon.icon-edit').click
-    expect(page).to have_content('Editing Option Type')
+    expect(page).to have_content(/Editing Option Type/i)
   end
 
   def accept_alert
