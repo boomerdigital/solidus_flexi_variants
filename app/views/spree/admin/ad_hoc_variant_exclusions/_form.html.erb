@@ -5,7 +5,7 @@
       <label>
         Choose a value for option type: <%= label_tag ad_hoc_option_type.option_type.presentation %>
       </label>
-      <%= select_tag "ad_hoc_option_type[#{ad_hoc_option_type.id}", options_from_collection_for_select(ad_hoc_option_type.ad_hoc_option_values, 'id', 'name'), {include_blank: 'All Values', class: "form-control" }%>
+      <%= select_tag "ad_hoc_option_type[#{ad_hoc_option_type.id}]", options_from_collection_for_select(ad_hoc_option_type.ad_hoc_option_values, 'id', 'name'), {include_blank: 'All Values', class: "form-control" }%>
     </div>
   <% end %>
 </div>

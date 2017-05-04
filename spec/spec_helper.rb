@@ -12,7 +12,6 @@ require 'factory_girl'
 require 'ffaker'
 require 'shoulda-matchers'
 require 'pry'
-require 'capybara-screenshot/rspec'
 
 require 'spree/testing_support/preferences'
 require 'spree/testing_support/authorization_helpers'
@@ -22,12 +21,17 @@ require 'spree/testing_support/factories'
 require 'spree/testing_support/url_helpers'
 require 'spree/testing_support/order_walkthrough'
 
-Capybara.save_and_open_page_path = ENV['CIRCLE_ARTIFACTS'] if ENV['CIRCLE_ARTIFACTS']
-
-if ENV['WEBDRIVER'] == 'accessible'
-  require 'capybara/accessible'
-  Capybara.javascript_driver = :accessible
+require 'capybara/rspec'
+require 'capybara-screenshot/rspec'
+require 'capybara/poltergeist'
+Capybara.register_driver(:poltergeist) do |app|
+  Capybara::Poltergeist::Driver.new app, {
+    phantomjs_options: %w[--ssl-protocol=any --ignore-ssl-errors=true --load-images=false],
+    timeout: 90
+  }
 end
+Capybara.javascript_driver = :poltergeist
+Capybara.default_max_wait_time = 10
 
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
 Dir[File.join(File.dirname(__FILE__), 'factories/*.rb')].each { |f| require f }
@@ -47,19 +51,13 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
   config.fail_fast = ENV['FAIL_FAST'] || false
 
-  if ENV['WEBDRIVER'] == 'accessible'
-    config.around(:each, :inaccessible => true) do |example|
-      Capybara::Accessible.skip_audit { example.run }
-    end
-  end
-
-  config.before(:suite) do
+  config.before :suite do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with :truncation
   end
 
-  config.before do
-    DatabaseCleaner.strategy = RSpec.current_example.metadata[:js] ? :truncation : :transaction
+  config.before do |example|
+    DatabaseCleaner.strategy = example.metadata[:js] ? :truncation : :transaction
     DatabaseCleaner.start
   end
 
