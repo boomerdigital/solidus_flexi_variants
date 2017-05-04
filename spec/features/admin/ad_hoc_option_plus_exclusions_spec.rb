@@ -21,6 +21,8 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', js: true do
 
       wait_for_ajax
 
+      expect(page).to have_content(/Ad Hoc Option Value Deleted/i)
+
       expect(all('#option_values tr').length).to eq(2)
 
       go_to_product_page
