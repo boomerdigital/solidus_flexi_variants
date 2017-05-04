@@ -19,7 +19,7 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', js: true do
 
       accept_alert
 
-      expect(page).to_not have_content(/No route matches/i)
+      wait_for_ajax
 
       expect(all('#option_values tr').length).to eq(2)
 
