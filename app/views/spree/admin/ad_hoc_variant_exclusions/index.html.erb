@@ -3,9 +3,10 @@
 <h3><%= Spree.t("ad_hoc_variant_exclusions") %></h3>
 
 <% if @product.ad_hoc_option_types.size >= 2 %>
-  <% content_for(:page_actions) do %>
-    <li>
-      <%= link_to_with_icon 'plus', Spree.t("new_ad_hoc_variant_exclusion"), spree.new_admin_product_ad_hoc_variant_exclusion_url(@product), remote: true, class: 'btn-success', id: 'new_ad_hoc_variant_exclusion_link' %>
+
+  <% content_for :page_actions do %>
+    <li id="new_exclusion_link">
+      <%= button_link_to Spree.t(:new_ad_hoc_variant_exclusion), spree.new_admin_product_ad_hoc_variant_exclusion_url(@product), { remote: :true } %>
     </li>
   <% end %>
 
