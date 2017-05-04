@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-branch = ENV.fetch('SOLIDUS_BRANCH', 'v2.0')
+branch = ENV.fetch('SOLIDUS_BRANCH', 'master')
 gem "solidus", github: "solidusio/solidus", branch: branch
 gem "solidus_auth_devise", github: "solidusio/solidus_auth_devise"
 
@@ -14,5 +14,8 @@ else
   gem "rails", '~> 4.2.7' # workaround for bundler resolution issue
   gem "rails_test_params_backport", group: :test
 end
+
+gem 'pg'
+gem 'mysql2'
 
 gemspec
