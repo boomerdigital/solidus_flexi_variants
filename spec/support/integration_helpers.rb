@@ -26,7 +26,7 @@ module IntegrationHelpers
   def go_to_edit_ad_hoc_option_type
     click_on 'Ad Hoc Option Types'
     expect(page).to have_content('Add Option Types')
-    find('.fa.fa-edit').click
+    find('.fa.fa-edit', match: :first).click
     expect(page).to have_content('Option Values')
   end
 

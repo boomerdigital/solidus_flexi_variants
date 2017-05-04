@@ -32,7 +32,7 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', js: true do
       expect(all('#option_values tr').length).to eq(2)
       #add
       within('#available_option-values') do
-        find('.fa.fa-plus').click
+        find('.fa.fa-plus', match: :first).click
       end
 
       expect(all('#option_values tr').length).to eq(3)
@@ -62,7 +62,7 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', js: true do
 
       #test adding an option type
       click_on('Add Ad Hoc Option Type')
-      find('.fa.fa-plus').click
+      find('.fa.fa-plus', match: :first).click
       click_on('Update')
       expect(all('#ad_hoc_option_types tr').length).to eq(2)
     end
