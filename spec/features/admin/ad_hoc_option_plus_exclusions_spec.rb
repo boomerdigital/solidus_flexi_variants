@@ -6,12 +6,10 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', js: true do
     include IntegrationHelpers
     stub_authorization!
 
-    before do
-      @test_product = create(:product, name: 'Test Product', price: 12.99)
-    end
+    let!(:test_product) { create(:product, name: 'Test Product', price: 12.99) }
 
     it 'ad hoc option types add/removes the associated option value when clicked' do
-      setup_option_types_plus_ad_hoc_option_type
+      setup_option_types_plus_ad_hoc_option_type_color(test_product)
       go_to_product_page
       go_to_edit_ad_hoc_option_type
 
@@ -73,11 +71,11 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', js: true do
 
     ### ad hoc variant exclusions
     it 'ad hoc variant exclusions add/removes the associated option value when clicked' do
-      setup_option_types_plus_ad_hoc_option_type
+      setup_option_types_plus_ad_hoc_option_type_color(test_product)
       go_to_product_page
       go_to_ad_hoc_variant_exclusions
       expect(page).to have_content(/You only need to configure exclusions when you have more than one ad hoc option type/i)
-      setup_option_types_plus_ad_hoc_option_type_number_two
+      setup_option_types_plus_ad_hoc_option_type_size(test_product)
       go_to_product_page
       go_to_ad_hoc_variant_exclusions
       expect(page).to have_content(/No Ad hoc variant exclusion found/i)
@@ -91,26 +89,6 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', js: true do
       accept_alert
 
       expect(page).to have_content(/Exclusion Removed/i)
-    end
-
-    def setup_option_types_plus_ad_hoc_option_type
-      color_option_type = create(:option_type, name: 'color', presentation: 'Color')
-      color_ad_hoc_option_type = create(:ad_hoc_option_type, option_type_id: color_option_type.id, product_id: @test_product.id)
-
-      %w(Red Green Blue).each do |color|
-        option_value = create(:option_value, name: color.downcase, presentation: color, option_type: color_option_type)
-        color_ad_hoc_option_type.ad_hoc_option_values.create!(option_value_id: option_value.id)
-      end
-    end
-
-    def setup_option_types_plus_ad_hoc_option_type_number_two
-      size_option_type = create(:option_type, name: 'size', presentation: 'Size')
-      size_ad_hoc_option_type = create(:ad_hoc_option_type, option_type_id: size_option_type.id, product_id: @test_product.id)
-
-      %w(Small Medium Large).each do |size|
-        option_value = create(:option_value, name: size.downcase, presentation: size, option_type: size_option_type)
-        size_ad_hoc_option_type.ad_hoc_option_values.create!(option_value_id: option_value.id)
-      end
     end
   end
 end
