@@ -16,23 +16,22 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  solidus_version = '>= 1.0.0', '< 2.2.0'
+  solidus_version = '>= 1.0.0', '< 2.3.0'
 
   s.add_dependency('carrierwave')
   s.add_dependency('mini_magick')
   s.add_dependency 'solidus_core', solidus_version
 
   s.add_development_dependency 'rspec-rails', '~> 3.2'
-  s.add_development_dependency 'capybara'#,           '~> 2.1'
-  s.add_development_dependency "capybara-screenshot"
-  s.add_development_dependency 'capybara-accessible'
+  s.add_development_dependency 'capybara'
+  s.add_development_dependency 'capybara-screenshot'
+  s.add_development_dependency 'poltergeist', '~> 1.9'
   s.add_development_dependency 'coffee-rails'
   s.add_development_dependency 'coveralls'
-  s.add_development_dependency 'database_cleaner'#,   '~> 1.0.1'
+  s.add_development_dependency 'database_cleaner',   '~> 1.2'
   s.add_development_dependency 'factory_girl'
   s.add_development_dependency 'ffaker'
   s.add_development_dependency 'sass-rails'
-  s.add_development_dependency 'selenium-webdriver', "~> 2.53.4"
   s.add_development_dependency 'shoulda-matchers', '~> 2.7'
   s.add_development_dependency 'simplecov'#, '~> 0.9.0'
   s.add_development_dependency 'sqlite3'

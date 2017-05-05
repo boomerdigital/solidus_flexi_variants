@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Product Customizations', js: true do
+describe 'Product Customizations', :js, type: :feature do
   describe 'test add links / remove links / add options values / remove options values/ update and cancel buttons' do
     extend Spree::TestingSupport::AuthorizationHelpers::Request
     include IntegrationHelpers

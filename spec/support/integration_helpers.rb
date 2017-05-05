@@ -43,7 +43,8 @@ module IntegrationHelpers
   end
 
   def accept_alert
-    page.driver.browser.switch_to.alert.accept
+    page.accept_confirm
+    sleep 1.second
   end
 
   def wait_for_ajax
@@ -57,7 +58,7 @@ module IntegrationHelpers
 
   def setup_option_types_plus_ad_hoc_option_type_size(product)
     size_option_type = create(:option_type, name: 'size', presentation: 'Size')
-    size_ad_hoc_option_type = create(:ad_hoc_option_type, option_type_id: size_option_type.id, product_id: product.id)
+    size_ad_hoc_option_type = create(:ad_hoc_option_type, option_type_id: size_option_type.id, product_id: product.id, position: 1)
 
     %w(Small Medium Large).each do |size|
       option_value = create(:option_value, name: size.downcase, presentation: size, option_type: size_option_type)
