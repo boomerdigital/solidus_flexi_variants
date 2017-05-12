@@ -11,6 +11,10 @@ FactoryGirl.define do
     trait :with_engraving do
       customized_product_options { [create(:customized_product_option, product_option_name: 'inscription')] }
     end
+
+    trait :with_amount_times_constant do
+      customized_product_options { [create(:customized_product_option, product_option_name: 'amount')] }
+    end
   end
 
   factory :customized_product_option, class: Spree::CustomizedProductOption do

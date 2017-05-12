@@ -24,7 +24,10 @@ module Spree
     def compute(product_customization, variant=nil)
       # expecting only one CustomizedProductOption
       opt = product_customization.customized_product_options.detect {|cpo| cpo.customizable_product_option.name == "amount" } rescue 0.0
-      opt.value.to_i * preferred_multiplier
+
+      return 0 if opt.value.nil?
+
+      opt.value.to_i * (preferred_multiplier || 0)
     end
   end
 end
