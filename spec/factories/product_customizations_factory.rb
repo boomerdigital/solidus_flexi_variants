@@ -1,19 +1,30 @@
 FactoryGirl.define do
   factory :product_customization, class: Spree::ProductCustomization do
-    product_customization_type
-    line_item
+    product_customization_type { |p| p.association(:product_customization_type) }
+    line_item { |p| p.association(:line_item) }
 
-    after(:create) do |pc|
-      create(:customized_product_option, product_customization: pc)
+    trait :with_customization_image do
+      customized_product_options { [create(:customized_product_option, product_option_name: 'customization_image')] }
     end
   end
 
   factory :customized_product_option, class: Spree::CustomizedProductOption do
-    product_customization
-    customizable_product_option
+    transient do
+      product_option_name 'engraving'
+    end
+
+    product_customization { |p| p.association(:product_customization) }
     sequence(:value) { |n| "Customized Product Option Value ##{n} - #{Kernel.rand(9999)}" }
-    customization_image nil #TODO
+
+    before :create do |customized_opt, evaluator|
+      customized_opt.customizable_product_option = create(:customizable_product_option, name: evaluator.product_option_name)
+
+      if evaluator.product_option_name == 'customization_image'
+        File.open("./spec/fixtures/thinking-cat.jpg") {|f| customized_opt.customization_image.store!(f)}
+      end
+    end
   end
+
 
   factory :customizable_product_option, class: Spree::CustomizableProductOption do
     sequence(:name) { |n| "Customizable Product Option ##{n} - #{Kernel.rand(9999)}" }

@@ -16,6 +16,10 @@ FactoryGirl.define do
   factory :product_customization, class: Spree::ProductCustomization do
     product_customization_type { |p| p.association(:product_customization_type) }
     line_item { |p| p.association(:line_item) }
+
+    trait :with_customization_image do
+      customized_product_options { [create(:customized_product_option, product_option_name: 'customization_image')] }
+    end
   end
 end
 
@@ -32,9 +36,17 @@ end
 
 FactoryGirl.define do
   factory :customized_product_option, class: Spree::CustomizedProductOption do
+    transient do
+      product_option_name 'engraving'
+    end
+
     product_customization { |p| p.association(:product_customization) }
-    customizable_product_option { |p| p.association(:customizable_product_option) }
+    # customizable_product_option { |p| p.association(:customizable_product_option) }
     sequence(:value) { |n| "Customized Product Option Value ##{n} - #{Kernel.rand(9999)}" }
+
+    before :create do |customized_opt, evaluator|
+      customized_opt.customizable_product_option = create(:customizable_product_option, name: evaluator.product_option_name)
+    end
   end
 end
 
