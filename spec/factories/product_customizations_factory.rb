@@ -3,14 +3,19 @@ FactoryGirl.define do
     product_customization_type { |p| p.association(:product_customization_type) }
     line_item { |p| p.association(:line_item) }
 
+
     trait :with_customization_image do
       customized_product_options { [create(:customized_product_option, product_option_name: 'customization_image')] }
+    end
+
+    trait :with_engraving do
+      customized_product_options { [create(:customized_product_option, product_option_name: 'inscription')] }
     end
   end
 
   factory :customized_product_option, class: Spree::CustomizedProductOption do
     transient do
-      product_option_name 'engraving'
+      product_option_name 'inscription'
     end
 
     product_customization { |p| p.association(:product_customization) }
