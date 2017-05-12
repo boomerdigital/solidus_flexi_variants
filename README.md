@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/boomerdigital/solidus_flexi_variants.svg?branch=master)](https://travis-ci.org/boomerdigital/solidus_flexi_variants)
+
 #SolidusFlexiVariants
 
 This extension solves two use cases related to variants.  I call them **Ad Hoc Options** and **Product Customizations**.
