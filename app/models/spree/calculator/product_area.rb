@@ -40,7 +40,7 @@ module Spree
       width,height = get_option(product_customization, "width"), get_option(product_customization, "height")
 
       # here's the custom logic for this calculator:  min total width + height = 20.
-      [(width.value.to_f * height.value.to_f), (preferred_min_pricing_area || 0)].max * preferred_multiplier
+      [(width.value.to_f * height.value.to_f), (preferred_min_pricing_area || 0)].max * (preferred_multiplier || 0)
     end
 
     def valid_configuration?(product_customization)
@@ -57,7 +57,7 @@ module Spree
       #    return has_inputs && width && height && (width.value.to_f * height.value.to_f) >= preferred_min_area
 
       #    rescue false
-      return true
+      !width.value.nil? || !height.value.nil?
     end
 
 

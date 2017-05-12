@@ -15,6 +15,10 @@ FactoryGirl.define do
     trait :with_amount_times_constant do
       customized_product_options { [create(:customized_product_option, product_option_name: 'amount')] }
     end
+
+    trait :with_product_area do
+      customized_product_options { [create(:customized_product_option, product_option_name: 'width'), create(:customized_product_option, product_option_name: 'height')] }
+    end
   end
 
   factory :customized_product_option, class: Spree::CustomizedProductOption do
