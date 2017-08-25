@@ -11,15 +11,14 @@ Gem::Specification.new do |s|
   s.email             = 'acreilly3@gmail.com'
   s.homepage          = 'https://github.com/boomerdigital/solidus_flexi_variants'
 
-  s.files       = `git ls-files`.split("\n")
+  #s.files       = `git ls-files`.split("\n")
+  s.files = Dir['README.md', 'lib/**/*']
   s.test_files  = `git ls-files -- {spec}/*`.split("\n")
   s.require_path = 'lib'
   s.requirements << 'none'
 
   solidus_version = '>= 1.0.0', '< 2.3.0'
 
-  s.add_dependency('carrierwave')
-  s.add_dependency('mini_magick')
   s.add_dependency 'solidus_core', solidus_version
   s.add_dependency 'solidus_flexi_variants_core', s.version
   s.add_dependency 'solidus_flexi_variants_frontend', s.version

@@ -1,5 +1,3 @@
-require_dependency 'spree/calculator'
-
 module Spree
   class Calculator::NoCharge < Calculator
     def self.description
