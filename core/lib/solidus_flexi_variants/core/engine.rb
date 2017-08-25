@@ -1,4 +1,5 @@
 module SolidusFlexiVariants
+  module Core
     class Engine < Rails::Engine
       engine_name 'solidus_flexi_variants'
 
@@ -37,5 +38,6 @@ module SolidusFlexiVariants
                                                                       Spree::Calculator::NoCharge
                                                                      ])
       end
+    end
   end
 end
