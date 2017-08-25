@@ -1,4 +1,4 @@
 # desc "Explaining what the task does"
-# task :ex_engine do
+# task :solidus_flexi_variants_core do
 #   # Task goes here
 # end

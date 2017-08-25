@@ -1,3 +1,3 @@
-require 'solidus_core'
-require 'carrierwave'
-require 'solidus_flexi_variants/engine'
+require 'solidus_flexi_variants_core'
+require 'solidus_flexi_variants_backend'
+require 'solidus_flexi_variants_frontend'
