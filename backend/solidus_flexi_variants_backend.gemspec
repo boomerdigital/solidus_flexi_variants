@@ -18,9 +18,6 @@ Gem::Specification.new do |s|
 
   solidus_version = '>= 1.0.0', '< 2.3.0'
 
-  s.add_dependency('carrierwave')
-  s.add_dependency('mini_magick')
-  s.add_dependency 'solidus_core', solidus_version
   s.add_dependency 'solidus_flexi_variants_core', s.version
 
   s.add_development_dependency 'rspec-rails', '~> 3.2'

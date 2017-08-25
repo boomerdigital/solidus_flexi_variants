@@ -14,10 +14,6 @@ module SolidusFlexiVariants
         Dir.glob(File.join(File.dirname(__FILE__), "../../app/**/*_decorator*.rb")) do |c|
           Rails.configuration.cache_classes ? require(c) : load(c)
         end
-
-        Spree::Core::Environment::Calculators.class_eval do
-          attr_accessor :product_customization_types
-        end
       end
 
       config.to_prepare &method(:activate).to_proc
