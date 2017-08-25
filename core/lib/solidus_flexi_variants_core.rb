@@ -1,0 +1,3 @@
+module SolidusFlexiVariantsCore
+  # Your code goes here...
+end

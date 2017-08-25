@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
-  s.name        = 'solidus_flexi_variants'
+  s.name        = 'solidus_flexi_variants_core'
   s.version     = '1.0.0'
-  s.summary     = 'This is a solidus extension that solves two use cases related to variants.'
-  s.description = 'Solidus extension to create product variants as-needed'
+  s.summary     = 'Essential models and classes for Solidus FlexiVariants extension'
+  s.description = s.summary
   s.required_ruby_version = '>= 2.1'
 
   # s.original_author            = 'Jeff Squires'
@@ -21,9 +21,6 @@ Gem::Specification.new do |s|
   s.add_dependency('carrierwave')
   s.add_dependency('mini_magick')
   s.add_dependency 'solidus_core', solidus_version
-  s.add_dependency 'solidus_flexi_variants_core', s.version
-  s.add_dependency 'solidus_flexi_variants_frontend', s.version
-  s.add_dependency 'solidus_flexi_variants_backend', s.version
 
   s.add_development_dependency 'rspec-rails', '~> 3.2'
   s.add_development_dependency 'capybara'
