@@ -1,12 +1,11 @@
 Spree::Core::Engine.routes.draw do
-  match 'product_customizations/price', to: 'product_customizations#price', via: [:get, :post]
-
-  match 'customize/:product_id', to: 'products#customize', as: 'customize', via: [:get, :post]
 
   namespace :admin do
     resources :product_customization_types, only: [:index, :new, :create, :edit, :update, :destroy]
 
-    resources :products do
+    resources :variant_configurations, only: [:show, :create]
+
+    resources :products, only: [] do
 
       resources :ad_hoc_option_types, except: [:show] do
         member do
@@ -37,7 +36,7 @@ Spree::Core::Engine.routes.draw do
         end
       end
     end #products
+    
   end # namespace :admin
-
-  match 'admin/variant_configurations/:variant_id', to: 'admin/variant_configurations#configure', via: [:get, :post]
+  
 end

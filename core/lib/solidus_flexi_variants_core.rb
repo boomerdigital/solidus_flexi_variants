@@ -5,9 +5,6 @@ require 'carrierwave'
 require 'ad_hoc_utils'
 require 'product_customizations'
 
-
-puts "---- about to require engine"
-
 require 'solidus_flexi_variants/core'
 
 module SolidusFlexiVariantsCore
