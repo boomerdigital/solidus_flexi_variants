@@ -24,20 +24,4 @@ Gem::Specification.new do |s|
   s.add_dependency 'solidus_flexi_variants_frontend', s.version
   s.add_dependency 'solidus_flexi_variants_backend', s.version
 
-  s.add_development_dependency 'rspec-rails', '~> 3.2'
-  s.add_development_dependency 'capybara'
-  s.add_development_dependency 'capybara-screenshot'
-  s.add_development_dependency 'poltergeist', '~> 1.9'
-  s.add_development_dependency 'coffee-rails'
-  s.add_development_dependency 'coveralls'
-  s.add_development_dependency 'database_cleaner',   '~> 1.2'
-  s.add_development_dependency 'factory_girl'
-  s.add_development_dependency 'ffaker'
-  s.add_development_dependency 'sass-rails'
-  s.add_development_dependency 'shoulda-matchers', '~> 2.7'
-  s.add_development_dependency 'simplecov'#, '~> 0.9.0'
-  s.add_development_dependency 'sqlite3'
-  s.add_development_dependency 'launchy'
-  s.add_development_dependency 'xray-rails'
-  s.add_development_dependency 'jazz_fingers'
 end

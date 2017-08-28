@@ -1,4 +1,10 @@
 FactoryGirl.define do
+  factory :customizable_product, parent: :base_product do
+    after(:create) do |p|
+      p.product_customization_types << FactoryGirl.create(:product_customization_type)
+    end
+  end
+  
   factory :product_customization, class: Spree::ProductCustomization do
     product_customization_type { |p| p.association(:product_customization_type) }
     line_item { |p| p.association(:line_item) }
