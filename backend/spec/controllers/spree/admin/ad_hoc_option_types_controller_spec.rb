@@ -9,6 +9,7 @@ RSpec.describe Spree::Admin::AdHocOptionTypesController, type: :controller do
 
 
   describe '#index' do
+   
     subject { get :index, params: { product_id: product.slug } }
 
     it 'lists all product option types' do

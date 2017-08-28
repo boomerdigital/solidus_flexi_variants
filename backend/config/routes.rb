@@ -1,3 +1,4 @@
+puts "---- routes are referenced"
 Spree::Core::Engine.routes.draw do
 
   namespace :admin do
@@ -5,7 +6,7 @@ Spree::Core::Engine.routes.draw do
 
     resources :variant_configurations, only: [:show, :create]
 
-    resources :products, only: [] do
+    resources :products do
 
       resources :ad_hoc_option_types, except: [:show] do
         member do
