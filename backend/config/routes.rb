@@ -1,4 +1,3 @@
-puts "---- routes are referenced"
 Spree::Core::Engine.routes.draw do
 
   namespace :admin do
