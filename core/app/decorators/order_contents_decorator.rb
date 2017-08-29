@@ -4,6 +4,7 @@ Spree::OrderContents.class_eval do
   #this whole thing needs a refactor!
 
   def add_to_line_item(variant, quantity, options = {})
+    puts "--- using Spree::OrderContents.add_to_line_item defined in Solidus Flexi Variants core"
     line_item = grab_line_item_by_variant(variant, false, options)
 
     line_item ||= order.line_items.new(

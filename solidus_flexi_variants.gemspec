@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'solidus_flexi_variants'
-  s.version     = '1.0.0'
+  s.version     = '0.1.0'
   s.summary     = 'This is a solidus extension that solves two use cases related to variants.'
   s.description = 'Solidus extension to create product variants as-needed'
   s.required_ruby_version = '>= 2.1'
