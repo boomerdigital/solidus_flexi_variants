@@ -1,5 +1,5 @@
 module Spree
-  class Admin::ProductCustomizationTypesController < ResourceController
+  class Admin::ProductCustomizationTypesController < Admin::ResourceController
     before_action :load_product, only: [:selected, :available, :remove, :select]
     before_action :load_calculators, only: [:new, :edit]
 
