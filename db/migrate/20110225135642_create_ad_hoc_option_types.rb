@@ -1,4 +1,4 @@
-class CreateAdHocOptionTypes < ActiveRecord::Migration
+class CreateAdHocOptionTypes < SolidusSupport::Migration[4.2]
   def self.up
     create_table :ad_hoc_option_types do |t|
       t.integer :product_id
