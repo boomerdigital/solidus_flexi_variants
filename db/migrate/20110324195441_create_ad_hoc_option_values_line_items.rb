@@ -1,4 +1,4 @@
-class CreateAdHocOptionValuesLineItems < ActiveRecord::Migration
+class CreateAdHocOptionValuesLineItems < SolidusSupport::Migration[4.2]
   def self.up
     create_table :ad_hoc_option_values_line_items, id: false do |t|
       t.integer :line_item_id

@@ -1,4 +1,4 @@
-class AddPositionToAdHocOptionValues < ActiveRecord::Migration
+class AddPositionToAdHocOptionValues < SolidusSupport::Migration[4.2]
   def self.up
     add_column :ad_hoc_option_values, :position, :integer
   end

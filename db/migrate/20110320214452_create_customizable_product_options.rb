@@ -1,4 +1,4 @@
-class CreateCustomizableProductOptions < ActiveRecord::Migration
+class CreateCustomizableProductOptions < SolidusSupport::Migration[4.2]
   def self.up
     create_table :customizable_product_options do |t|
       t.integer  :product_customization_type_id

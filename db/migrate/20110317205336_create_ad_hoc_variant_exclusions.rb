@@ -1,4 +1,4 @@
-class CreateAdHocVariantExclusions < ActiveRecord::Migration
+class CreateAdHocVariantExclusions < SolidusSupport::Migration[4.2]
   def self.up
     create_table :ad_hoc_variant_exclusions do |t|
       t.integer :product_id

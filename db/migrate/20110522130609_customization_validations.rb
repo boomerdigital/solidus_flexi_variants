@@ -1,4 +1,4 @@
-class CustomizationValidations < ActiveRecord::Migration
+class CustomizationValidations < SolidusSupport::Migration[4.2]
   def self.new_validation_string (data_type, required)
     {type: data_type, required: required=="t" }.to_json
   end
