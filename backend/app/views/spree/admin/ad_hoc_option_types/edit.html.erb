@@ -19,7 +19,7 @@
         <tr data-hook="ad_hoc_option_type_header">
           <th><%= Spree.t("name") %></th>
           <th><%= Spree.t("display") %></th>
-          <th><%= Spree.t("price_modifier") %></th>
+          <th><%= Spree.t("price_modifier") %><%= @ad_hoc_option_type.price_modifier_type ? " (Ratio of base price)" : "" %></th>
           <th><%= Spree.t("cost_price_modifier") %></th>
           <th><%= Spree.t("selected_by_default") %></th>
           <th class='actions'></th>
