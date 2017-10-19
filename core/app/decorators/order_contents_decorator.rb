@@ -31,27 +31,37 @@ Spree::OrderContents.class_eval do
 
       #retrieve ad_hoc_option_values with associated option type
       product_option_values = ad_hoc_option_value_ids.map do |cid|
-        Spree::AdHocOptionValue.includes(:ad_hoc_option_type).find(cid) if cid.present?
+        Spree::AdHocOptionValue.includes(:ad_hoc_option_type).where("id = ?", cid).first if cid.present?
       end.compact
+
+      product_option_groups = product_option_values.group_by{ |pov| pov["ad_hoc_option_type_id"] }
 
       multiplicative_price_ratio = 1
       additive_price = 0
-      i = 0
-      product_option_values.each do |pov|
-        if pov.ad_hoc_option_type.price_modifier_type
-          #signifies that this is a multiplier ratio acting on the line item
-          if i == 0
-            #reset multiplicative price ratio on first appearance of ratio type
-            multiplicative_price_ratio = 0
-            i = 1
+      
+
+      product_option_groups.each do |ad_hoc_option_type_id, pog|
+        group_price_ratio = 1
+        is_multiplicative_type = false
+        pog.each do |pov|
+          if pov.ad_hoc_option_type.price_modifier_type
+            if is_multiplicative_type == false
+              #now that we know the option set has multiplicative types, we need to start summing from zero
+              is_multiplicative_type = true
+              group_price_ratio = 0
+            end
+            #signifies that this is a multiplier ratio acting on the line item
+            group_price_ratio += pov.price_modifier
+          else
+            #signifies that this is an additive amount acting on the line item
+            additive_price += pov.price_modifier
           end
-          multiplicative_price_ratio += pov.price_modifier
-        else
-          #signifies that this is an additive amount acting on the line item
-          additive_price += pov.price_modifier
         end
+        multiplicative_price_ratio *= group_price_ratio
       end
 
+      puts "final additive price for options is #{additive_price}"
+      puts "final multiplicative_price_ratio for options is #{multiplicative_price_ratio}"
 
       line_item.ad_hoc_option_values = product_option_values
 
