@@ -44,7 +44,7 @@ Spree::OrderContents.class_eval do
         group_price_ratio = 1
         is_multiplicative_type = false
         pog.each do |pov|
-          if pov.ad_hoc_option_type.price_modifier_type
+          if pov.ad_hoc_option_type.price_modifier_type == "1"
             if is_multiplicative_type == false
               #now that we know the option set has multiplicative types, we need to start summing from zero
               is_multiplicative_type = true
