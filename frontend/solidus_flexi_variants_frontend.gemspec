@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'solidus_flexi_variants_frontend'
-  s.version     = '0.1.0'
+  s.version     = '0.0.1'
   s.summary     = 'Consumer-facing frontend for the Solidus FlexiVariants extension'
   s.description = s.summary
   s.required_ruby_version = '>= 2.1'
@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'solidus_flexi_variants_core', s.version
   s.add_dependency 'solidus_frontend', solidus_version
+  s.add_dependency 'deface'
 
   s.add_development_dependency 'rspec-rails', '~> 3.2'
   s.add_development_dependency 'capybara'

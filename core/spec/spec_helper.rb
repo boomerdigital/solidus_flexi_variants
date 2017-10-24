@@ -39,9 +39,9 @@ Capybara.javascript_driver = :poltergeist
 Capybara.default_max_wait_time = 10
 
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
-Dir[File.join(File.dirname(__FILE__), 'factories/*.rb')].each { |f| require f }
 
-
+### Load factories from Core gem
+require 'solidus_flexi_variants/testing_support/factories'
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods

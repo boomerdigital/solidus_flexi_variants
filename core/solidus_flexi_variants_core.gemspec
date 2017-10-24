@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'solidus_flexi_variants_core'
-  s.version     = '0.1.0'
+  s.version     = '0.0.1'
   s.summary     = 'Essential models and classes for Solidus FlexiVariants extension'
   s.description = s.summary
   s.required_ruby_version = '>= 2.1'
