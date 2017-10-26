@@ -11,7 +11,7 @@ module SolidusFlexiVariants
       end
 
       def self.activate
-        puts "---- activating SolidusFlexiVariants Core engine"
+        puts "---- activating SolidusFlexiVariants Core engine_core_2"
         Dir.glob(File.join(File.dirname(__FILE__), "../../../app/**/*_decorator*.rb")) do |c|
           Rails.configuration.cache_classes ? require(c) : load(c)
         end
