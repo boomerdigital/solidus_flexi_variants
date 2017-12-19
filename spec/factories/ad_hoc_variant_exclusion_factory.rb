@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :ad_hoc_variant_exclusion, class: Spree::AdHocVariantExclusion do
     product
   end
