@@ -56,6 +56,20 @@ module IntegrationHelpers
     end
   end
 
+  def setup_customization_type_and_options(product)
+    prod_cust_type = create(:product_customization_type, :no_charge_calculator)
+    customizable_option = create(:customizable_product_option, :string_type, product_customization_type: prod_cust_type)
+    # associate to product
+    Spree::ProductCustomizationTypesProduct.create(product_id: product.id, product_customization_type_id: prod_cust_type.id)
+
+    puts "---- inside setup"
+    puts "prod_cust_type is #{prod_cust_type.to_json}"
+    puts "calculator is #{prod_cust_type.calculator}"
+    puts "---- customizable_option"
+    puts "cust optioin is #{customizable_option.to_json}"
+    puts "type is #{customizable_option.product_customization_type.to_json}"
+  end
+
   def setup_option_types_plus_ad_hoc_option_type_size(product)
     size_option_type = create(:option_type, name: 'size', presentation: 'Size')
     size_ad_hoc_option_type = create(:ad_hoc_option_type, option_type_id: size_option_type.id, product_id: product.id, position: 1)
