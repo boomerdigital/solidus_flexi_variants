@@ -10,6 +10,7 @@
         <th><%= Spree.t("name") %></th>
         <th><%= Spree.t("presentation") %></th>
         <th><%= Spree.t("description") %></th>
+        <th><%= Spree.t("calculator") %></th>
         <th class="actions"></th>
       </tr>
     </thead>
@@ -19,6 +20,7 @@
           <td class='name'><%= product_customization_type.name %></td>
           <td class='presentation'><%= product_customization_type.presentation %></td>
           <td class='description'><%= product_customization_type.description %></td>
+          <td class='calculator'><%= product_customization_type.calculator.class.name.demodulize %></td>
           <td class="actions actions-2 text-right">
             <%= link_to_edit(product_customization_type, no_text: true, class: 'admin_edit_product_customization_type') %>
             <%= link_to_delete(product_customization_type, no_text: true) %>

@@ -1,11 +1,10 @@
 <%# render the (possibly shared) calculator %>
-<% cust_dom_id = "customization_image_#{product_customization_type.customizable_product_options.first.id}" %>
 <%= render partial: "spree/products/customizations/calculator/#{calculator_name(product_customization_type)}", locals: {calculator: product_customization_type.calculator} %>
 <%# add the 'change' listener for this particular file input, which will make use of the calculator above %>
 
 <%= content_for :flexi_variants_body_js do %>
   <%= javascript_tag do %>
-    $(document).on('change', '#<%= cust_dom_id %>', function(e) {
+    $(document).on('change', '.<%= product_customization_type.name.parameterize %> .customization', function(e) {
 
       // update the hidden price field for this file input
       $(this).siblings(".customization_price").val(calculate_customization_image_price(this));
@@ -16,13 +15,15 @@
   <% end %>
 <% end %>
 
-<div class="col-md-<%= Spree.t(:variant_col_size) %> form-group">
-  <% option = product_customization_type.customizable_product_options.first %>
+<div class="col-md-<%= Spree.t(:variant_col_size) %> form-group <%= product_customization_type.name.parameterize %>">
   <div class="form-for-customizable-product-option custom-image">
-    <p><%= product_customization_type.description  %></p>
-    <h5><%= option.presentation %></h5>
-    <%= file_field_tag "#{param_prefix}[#{product_customization_type.customizable_product_options.first.id}][customization_image]", class: "customization", id: cust_dom_id %>
-    <p><%= option.description %></p>
+    <% if product_customization_type.description %>
+      <p><%= product_customization_type.description  %></p>
+    <% end %>
+
+    <% product_customization_type.customizable_product_options.each do |cpo| %>
+      <%= render "spree/products/customizations/fields/#{cpo.data_type}", option: cpo, param_prefix: param_prefix, dom_id: "customization_image_#{cpo.id}" %>
+    <% end %>
     <%# the price is stored here on change, and later collected by the product-wide updatePrice() %>
     <%= link_to Spree.t("reset"),"" %>
     <%= hidden_field_tag "customization_price", "0", class: "customization_price" %>

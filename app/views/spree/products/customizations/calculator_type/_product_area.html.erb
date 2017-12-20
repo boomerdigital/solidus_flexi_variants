@@ -1,6 +1,4 @@
 <% # render the (possibly shared) calculator %>
-<% width_dom_id = "product_area_input_#{product_customization_type.customizable_product_options.first.id}" %>
-<% height_dom_id = "product_area_input_#{product_customization_type.customizable_product_options.second.id}" %>
 <%= render partial: "spree/products/customizations/calculator/#{calculator_name(product_customization_type)}", locals: {calculator: product_customization_type.calculator} %>
 <% # add the 'change' listener for this particular file input, which will make use of the calculator above %>
 
@@ -17,26 +15,19 @@
       }, 1000 ); // delay
     }; // keyup
 
-    $(document).on('keyup', '#<%= width_dom_id %>', product_area_keyup);
-    $(document).on('keyup', '#<%= height_dom_id %>', product_area_keyup);
+    $(document).on('keyup', '.<%= product_customization_type.name.parameterize %> .customization', product_area_keyup);
   <% end %>
 <% end %>
 
-<div class="col-md-<%= Spree.t(:variant_col_size) %> form-group">
-  <% option = product_customization_type.customizable_product_options.first %>
-  <p><%= product_customization_type.description  %></p>
-  <h5><%= option.presentation %></h5>
-  <% # create a slightly shorter dom_id field below.  I wish I could make use of dom_id for all strings that had [ && ] %>
-  <%= text_field_tag "#{param_prefix}[#{option.id}]", "", id: width_dom_id, class: "customization form-control", placeholder: option.description %>
-  <% option = product_customization_type.customizable_product_options.second %>
-  <h5><%= option.presentation %></h5>
-  <%= text_field_tag "#{param_prefix}[#{option.id}]", "", id: height_dom_id, class: "customization form-control", placeholder: option.description %>
+<div class="col-md-<%= Spree.t(:variant_col_size) %> form-group <%= product_customization_type.name.parameterize %>">
+  <% if product_customization_type.description %>
+    <p><%= product_customization_type.description  %></p>
+  <% end %>
+
+  <% product_customization_type.customizable_product_options.each do |cpo| %>
+    <%= render "spree/products/customizations/fields/#{cpo.data_type}", option: cpo, param_prefix: param_prefix, dom_id: "product_area_input_#{cpo.id}" %>
+  <% end %>
+
   <%# the price is stored here on change, and later collected by the product-wide updatePrice() %>
   <%= hidden_field_tag "customization_price", "0", class: "customization_price" %>
-</div>
-
-<div class="col-md-<%= Spree.t(:variant_col_size) %> form-group">
-  <% product_customization_type.customizable_product_options.each do |cpo| %>
-    <%= render "spree/products/customizations/fields/#{cpo.data_type}" %>
-  <% end %>
 </div>

@@ -1,4 +1,4 @@
 <h5><%= option.presentation %></h5>
 <label><%= option.description %><br>
-	<%= datetime_select("#{param_prefix}[#{option.id}]", 'time', {:order => [:year, :month, :day, :hour,:minute], minute_step: 15, ampm: true}, {class: "#{param_prefix}"}) %>
+	<%= datetime_select("#{param_prefix}[#{option.id}]", 'time', {:order => [:year, :month, :day, :hour,:minute], minute_step: 15, ampm: true}, {class: "#{param_prefix} customization"}) %>
 </label><br>

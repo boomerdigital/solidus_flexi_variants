@@ -43,6 +43,7 @@ en:
     min_area: 'Min. Area'
     min_amount: 'Min. Amount'
     max_amount: 'Max. Amount'
+    selectable_options: 'Options {"presentation":"value"}'
     min_pricing_area: 'Min. Area to Price (possibly has smaller area, but will be priced as if this area)'
     not_all_combinations_available: '*Note that not all option combinations are available'
     select_variant_options: 'Options'

@@ -1,11 +1,10 @@
 <%# render the (possibly shared) calculator %>
-<% cust_dom_id = "amount_times_constant_input_#{product_customization_type.customizable_product_options.first.id}" %>
 <%= render partial: "spree/products/customizations/calculator/#{calculator_name(product_customization_type)}", locals: {calculator: product_customization_type.calculator} %>
 <%# add the 'change' listener for this particular file input, which will make use of the calculator above %>
 
 <%= content_for :flexi_variants_body_js do %>
   <%= javascript_tag do %>
-    $(document).on('keyup', '#<%= cust_dom_id %>', function(e) {
+    $(document).on('keyup', '.<%= product_customization_type.name.parameterize %> .customization', function(e) {
 
       var text_field = $(this);
 
@@ -21,11 +20,16 @@
 <% end %>
 
 <div class="col-md-<%= Spree.t(:variant_col_size) %> form-group">
-  <% option = product_customization_type.customizable_product_options.first %>
-  <div class="form-for-customizable-product-option amount-times">
-    <p><%= product_customization_type.description  %></p>
-    <h5><%= option.presentation %></h5>
-    <%= text_field_tag "#{param_prefix}[#{product_customization_type.customizable_product_options.first.id}]", "", id: cust_dom_id, class: "customization form-control", placeholder: option.description %>
+  <div class="form-for-customizable-product-option <%= product_customization_type.name.parameterize %>">
+
+    <% if product_customization_type.description %>
+      <p><%= product_customization_type.description %></p>
+    <% end %>
+
+    <% product_customization_type.customizable_product_options.each do |cpo| %>
+      <%= render "spree/products/customizations/fields/#{cpo.data_type}", option: cpo, param_prefix: param_prefix, dom_id: "amount_times_constant_input_#{cpo.id}" %>
+    <% end %>
+
     <%# the price is stored here on change, and later collected by the product-wide updatePrice() %>
     <%= hidden_field_tag "customization_price", "0", class: "customization_price" %>
   </div>
