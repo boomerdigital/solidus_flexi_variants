@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency('mini_magick')
   s.add_dependency 'solidus_core', solidus_version
   s.add_dependency 'solidus_support'
+  s.add_dependency 'deface'
 
   s.add_development_dependency 'rspec-rails', '~> 3.2'
   s.add_development_dependency 'capybara'

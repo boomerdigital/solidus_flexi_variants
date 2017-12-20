@@ -7,7 +7,6 @@ unless !defined?(Spree::ProductsController)
     # is there a better way to make sure options are passed into add order contents?
     def populate
       #format ad_hoc_options, product_customizations, and customization_price
-      set_option_params_values
       order    = current_order(create_order_if_necessary: true)
       variant  = Spree::Variant.find(params[:variant_id])
       quantity = params[:quantity].to_i
@@ -44,31 +43,6 @@ unless !defined?(Spree::ProductsController)
         options_hash[:customization_price] = customization_price
       end
       return options_hash
-    end
-
-    def product_customizations(customizations_hash)
-      customizations = []
-      # do we have any customizations?
-      customizations_hash.each do |customization_type_id, customization_pair_value|  # customization_type_id =>
-        # {customized_product_option_id => <user input>,  etc.}
-        next if customization_pair_value.empty? || customization_pair_value.values.all? {|value| value.empty?}
-        # create a product_customization based on customization_type_id
-        product_customization = Spree::ProductCustomization.new(product_customization_type_id: customization_type_id)
-        customization_pair_value.each_pair do |customized_option_id, user_input|
-          # create a customized_product_option based on customized_option_id
-          customized_product_option = build_customized_product_option(customized_option_id, user_input)
-          # attach to its customization
-          product_customization.customized_product_options << customized_product_option
-        end
-        customizations << product_customization
-      end if params[:product_customizations]
-      customizations
-    end
-
-    def build_customized_product_option(customizable_product_option_id, value_from_params)
-      cpo = Spree::CustomizedProductOption.new(customizable_product_option_id: customizable_product_option_id)
-      cpo.set_value_for_type(value_from_params)
-      return cpo
     end
 
   end
