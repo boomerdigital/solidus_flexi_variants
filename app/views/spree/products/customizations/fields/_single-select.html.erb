@@ -1,0 +1,10 @@
+<h5><%= option.presentation %></h5>
+<% if option.description == nil or option.description == "" or !JSON.parse(option.description).is_a? Hash %>
+	<p>No selectable options provided</p>
+<% else %>
+	<select name="#{param_prefix}[#{option.id}]" id="<%= "customize-option-#{option.id}" %>">
+		<% JSON.parse(option.description).each do |k,v| %>
+			<label><option value="<%= v %>"> <%= k %></label><br>
+		<% end %>
+	</select>
+<% end %>

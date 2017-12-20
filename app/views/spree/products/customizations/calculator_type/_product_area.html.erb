@@ -34,3 +34,9 @@
   <%# the price is stored here on change, and later collected by the product-wide updatePrice() %>
   <%= hidden_field_tag "customization_price", "0", class: "customization_price" %>
 </div>
+
+<div class="col-md-<%= Spree.t(:variant_col_size) %> form-group">
+  <% product_customization_type.customizable_product_options.each do |cpo| %>
+    <%= render "spree/products/customizations/fields/#{cpo.data_type}" %>
+  <% end %>
+</div>

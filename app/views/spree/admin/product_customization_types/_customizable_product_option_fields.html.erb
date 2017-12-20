@@ -6,12 +6,15 @@
   <% end %>
   <td><%= f.text_field :presentation, class: "form-control" %></td>
   <td><%= f.text_field :description, class: "form-control" %></td>
+
   <% if editable %>
+    <td><%= f.select :data_type, options_for_select([["String", "string"], ["Integer", "integer"], ["Float", "float"], ["Date and time", "datetime"], ["File", "file"], ["Single select", "single-select"], ["Multi-select", "multi-select"], ["Boolean", "boolean"]], f.object.data_type), {}, {:class => "select-style"} %></td>
     <td class="actions actions-<1 text-center">
       <%# TODO fix this link %>
       <%= link_to_with_icon 'delete', '', remove_admin_product_product_customization_type_path(f), class: 'btn btn-danger btn-sm' %>
     </td>
   <% else %>
+    <td><%= f.object.data_type.to_s %></td>
     <td class="actions actions-0 text-center">
     </td>
   <% end %>

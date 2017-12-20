@@ -8,7 +8,7 @@
     </div>
     <ul class="list-group list-unstyled">
       <% @product.product_customization_types.group_by{ |x| calculator_name(x) }.each do |product_customization_grouped_by_calc_type| %>
-        <% product_clac_name, product_customization_type_group = product_customization_grouped_by_calc_type %>
+        <% product_calc_name, product_customization_type_group = product_customization_grouped_by_calc_type %>
         <div class='col-sm-12'>
           <legend><%= product_customization_type_group.first.presentation %></legend>
         </div>
@@ -19,7 +19,7 @@
           <% if lookup.exists?(partial_name,nil,true) %>
             <%= render partial: partial_name, locals: {product_customization_type: product_customization_type, param_prefix: param_prefix} %>
           <% else %>
-            <% partial_name = "spree/products/customizations/calculator_type/#{product_clac_name}" %>
+            <% partial_name = "spree/products/customizations/calculator_type/#{product_calc_name}" %>
             <% if lookup.exists?(partial_name,nil,true) %>
               <%= render partial: partial_name, locals: {product_customization_type: product_customization_type, param_prefix: param_prefix} %>
             <% else %>

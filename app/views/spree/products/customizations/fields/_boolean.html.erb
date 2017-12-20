@@ -1,0 +1,4 @@
+<h5><%= option.presentation %></h5>
+<label>
+	<%= check_box_tag "#{param_prefix}[#{option.id}]", value="1", true, {id: "customize-option-#{option.id}-true", class: "customization"} %> <%= option.description %>
+</label>
