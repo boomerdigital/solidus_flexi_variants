@@ -52,6 +52,28 @@ FactoryBot.define do
       data_type "integer"
     end
 
+    trait :float_type do
+      data_type "float"
+    end
+
+    trait :single_select_type do
+      data_type "single-select"
+      selectable_options ({"Either" => "1", "Or" => "2"})
+    end
+
+    trait :multi_select_type do
+      data_type "multi-select"
+      selectable_options ({"Both" => "1", "And" => "2"})
+    end
+
+    trait :boolean_type do
+      data_type "boolean"
+    end
+
+    trait :file_type do
+      data_type "file"
+    end
+
     product_customization_type
   end
 

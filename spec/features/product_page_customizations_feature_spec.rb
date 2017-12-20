@@ -5,23 +5,19 @@ describe 'Customizations', :js, type: :feature do
 
   let(:test_product) { create(:product, name: 'Test Product', price: 12.99) }
 
-  context 'Ad Hoc Option Types' do
-    before do
-      setup_customization_type_and_options(test_product)
+  context 'Cutomization types appear on product page' do
+
+    it 'string type has input field' do
+      type, option = setup_customization_type_and_options(test_product, "string")
       visit spree.product_path(test_product)
+      expect(page).to have_css("input[type='text']#product_customizations_#{type.id}_#{option.id}")
     end
 
-    it 'has all ad hoc option values listed', focus: true do
-      expect(page).to have_content("Jehosaphat")
+    it 'integer type has input field', focus: true do
+      type, option = setup_customization_type_and_options(test_product, "integer")
+      visit spree.product_path(test_product)
+      expect(page).to have_css("input[type='number']#product_customizations_#{type.id}_#{option.id}")
     end
 
-
-    it 'selecting Red changes price' do
-      expect(find('.price.selling').has_content?('$12.99')).to be_truthy
-
-      select('Red', from: color_select)
-
-      expect(find('.price.selling').has_content?('$17.99')).to be_truthy
-    end
   end
 end
