@@ -25,7 +25,7 @@
   <% end %>
 
   <% product_customization_type.customizable_product_options.each do |cpo| %>
-    <%= render "spree/products/customizations/fields/#{cpo.data_type}", option: cpo, param_prefix: param_prefix, dom_id: "product_area_input_#{cpo.id}" %>
+    <%= render "spree/products/customizations/fields/#{cpo.data_type}", option: cpo, param_prefix: param_prefix, dom_id: "customization-option-#{cpo.id}" %>
   <% end %>
 
   <%# the price is stored here on change, and later collected by the product-wide updatePrice() %>

@@ -2,11 +2,11 @@
 <% if option.description == nil or option.description == {} %>
 	<p>option.description</p>
 <% end %>
-<% option.selectable_options == nil or option.selectable_options == {} or !JSON.parse(option.selectable_options).is_a? Hash %>
+<% if option.selectable_options == nil or option.selectable_options == {} or !JSON.parse(option.selectable_options).is_a? Hash %>
 	<p>Selectable options have not been set correctly.</p>
 <% else %>
-	<select name="#{param_prefix}[#{option.id}] customization" id="<%= "customize-option-#{option.id}" %>">
-		<% option.selectable_options.each do |k,v| %>
+	<select name="<%= "#{param_prefix}[#{option.id}]" %>" class="customization" id="<%= "customization-option-#{option.id}" %>">
+		<% JSON.parse(option.selectable_options).each do |k,v| %>
 			<label><option value="<%= v %>"> <%= k %></label><br>
 		<% end %>
 	</select>

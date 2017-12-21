@@ -22,13 +22,12 @@
   <% end %>
 
 <div class="col-md-<%= Spree.t(:variant_col_size) %> form-group <%= product_customization_type.name.parameterize %>">
-  <% option = product_customization_type.customizable_product_options.first %>
   <div class="form-for-customizable-product-option engraving">
     <% if product_customization_type.description %>
       <p><%= product_customization_type.description  %></p>
     <% end %>
     <% product_customization_type.customizable_product_options.each do |cpo| %>
-      <%= render "spree/products/customizations/fields/#{cpo.data_type}", option: cpo, param_prefix: param_prefix, dom_id: "engraving_input_#{cpo.id}" %>
+      <%= render "spree/products/customizations/fields/#{cpo.data_type}", option: cpo, param_prefix: param_prefix, dom_id: "customization-option-#{cpo.id}" %>
     <% end %>
     <%# the price is stored here on change, and later collected by the product-wide updatePrice() %>
     <%= hidden_field_tag "customization_price", "0", class: "customization_price" %>

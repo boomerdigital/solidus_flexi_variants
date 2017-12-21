@@ -6,6 +6,6 @@
 	<p>Selectable options have not been set correctly.</p>
 <% else %>
 	<% JSON.parse(option.selectable_options).each_with_index do |kv, index| %>
-		<label><input type="checkbox" name="<%= "#{param_prefix}[#{option.id}]" %>" id="<%= "customize-option-#{option.id}-#{index}" %>" value="<%= kv[1] %>" class="customization"> <%= kv[0] %></label><br>
+		<label><input type="checkbox" name="<%= "#{param_prefix}[#{option.id}]" %>" id="<%= "customization-option-#{option.id}-#{index}" %>" value="<%= kv[1] %>" class="customization"> <%= kv[0] %></label><br>
 	<% end %>
 <% end %>
