@@ -17,7 +17,7 @@ module Spree
     def create_options
       # This calculator knows that it needs one CustomizableOption named amount
       [
-       CustomizableProductOption.create(name: "amount", presentation: "Amount")
+       CustomizableProductOption.create(name: "amount", presentation: "Amount", data_type: "float")
       ]
     end
 

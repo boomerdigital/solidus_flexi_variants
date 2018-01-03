@@ -56,6 +56,30 @@ module IntegrationHelpers
     end
   end
 
+  def setup_customization_type_and_options(product, option_type_name)
+    prod_cust_type = create(:product_customization_type)
+    customizatable_option = case option_type_name
+    when "string"
+      create(:customizable_product_option, :string_type, product_customization_type: prod_cust_type)
+    when "integer"
+      create(:customizable_product_option, :integer_type, product_customization_type_id: prod_cust_type.id)
+    when "boolean"
+      create(:customizable_product_option, :boolean_type, product_customization_type: prod_cust_type)
+    when "single-select"
+      create(:customizable_product_option, :single_select_type, product_customization_type: prod_cust_type)
+    when "multi-select"
+      create(:customizable_product_option, :multi_select_type, product_customization_type: prod_cust_type)
+    when "float"
+      create(:customizable_product_option, :float_type, product_customization_type: prod_cust_type)
+    when "file"
+      create(:customizable_product_option, :file_type, product_customization_type: prod_cust_type)
+    else
+      raise "unknown option data type"
+    end
+    Spree::ProductCustomizationTypesProduct.create(product_id: product.id, product_customization_type_id: prod_cust_type.id)
+    return prod_cust_type, customizatable_option
+  end
+
   def setup_option_types_plus_ad_hoc_option_type_size(product)
     size_option_type = create(:option_type, name: 'size', presentation: 'Size')
     size_ad_hoc_option_type = create(:ad_hoc_option_type, option_type_id: size_option_type.id, product_id: product.id, position: 1)

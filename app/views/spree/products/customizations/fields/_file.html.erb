@@ -1,0 +1,5 @@
+<h5><%= option.presentation %></h5>
+<% if option.description %>
+	<p><%= option.description %></p>
+<% end %>
+<%= file_field_tag "#{param_prefix}[#{option.id}][customization_image]", class: "customization", id: "customization-option-#{option.id}" %>

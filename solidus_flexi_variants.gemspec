@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency('mini_magick')
   s.add_dependency 'solidus_core', solidus_version
   s.add_dependency 'solidus_support'
+  s.add_dependency 'deface'
 
   s.add_development_dependency 'rspec-rails', '~> 3.2'
   s.add_development_dependency 'capybara'
@@ -30,7 +31,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'coffee-rails'
   s.add_development_dependency 'coveralls'
   s.add_development_dependency 'database_cleaner',   '~> 1.2'
-  s.add_development_dependency 'factory_girl'
+  s.add_development_dependency 'factory_bot'
   s.add_development_dependency 'ffaker'
   s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'shoulda-matchers', '~> 2.7'

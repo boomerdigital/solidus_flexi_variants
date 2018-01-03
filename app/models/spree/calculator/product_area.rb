@@ -28,8 +28,8 @@ module Spree
     def create_options
       # This calculator knows that it needs two CustomizableOptions, width & height
       [
-       CustomizableProductOption.create(name: "width", presentation: "Width"),
-       CustomizableProductOption.create(name: "height", presentation: "Height")
+       CustomizableProductOption.create(name: "width", presentation: "Width", data_type: "float"),
+       CustomizableProductOption.create(name: "height", presentation: "Height", data_type: "float")
       ]
     end
 

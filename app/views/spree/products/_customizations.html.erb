@@ -8,7 +8,7 @@
     </div>
     <ul class="list-group list-unstyled">
       <% @product.product_customization_types.group_by{ |x| calculator_name(x) }.each do |product_customization_grouped_by_calc_type| %>
-        <% product_clac_name, product_customization_type_group = product_customization_grouped_by_calc_type %>
+        <% product_calc_name, product_customization_type_group = product_customization_grouped_by_calc_type %>
         <div class='col-sm-12'>
           <legend><%= product_customization_type_group.first.presentation %></legend>
         </div>
@@ -19,23 +19,12 @@
           <% if lookup.exists?(partial_name,nil,true) %>
             <%= render partial: partial_name, locals: {product_customization_type: product_customization_type, param_prefix: param_prefix} %>
           <% else %>
-            <% partial_name = "spree/products/customizations/calculator_type/#{product_clac_name}" %>
+            <% partial_name = "spree/products/customizations/calculator_type/#{product_calc_name}" %>
             <% if lookup.exists?(partial_name,nil,true) %>
               <%= render partial: partial_name, locals: {product_customization_type: product_customization_type, param_prefix: param_prefix} %>
             <% else %>
-              <li>
-                <div class="col-md-<%= Spree.t(:variant_col_size) %> form-group">
-                  <p><%= product_customization_type.description  %></p>
-                  <% product_customization_type.customizable_product_options.each_with_index do |customizable_product_option, index| %>
-                    <h5 class="presentation-for-customizable-product-option">
-                      <%= customizable_product_option.presentation %>
-                    </h5>
-                    <div class="form-for-customizable-product-option <%= "customization_option_#{index}" %>">
-                      <%= text_field_tag "#{param_prefix}[#{customizable_product_option.id}]","", class: "customization form-control", placeholder:  customizable_product_option.description%>
-                    </div>
-                  <% end # options.each %>
-                </div>
-              </li>
+              <p>First attempt: Customization type template with name <%= product_customization_type.name %> was not found.</p>
+              <p>Second attempt: Calculator type template with name <%= product_customization_type.name %> was not found.</p>
             <% end %> <%# lookup.exists? %>
           <% end %> <%# lookup.exists? %>
         <% end %> <%# each product_customization_type %>

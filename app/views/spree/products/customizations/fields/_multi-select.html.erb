@@ -1,0 +1,11 @@
+<h5><%= option.presentation %></h5>
+<% if option.description == nil or option.description == {} %>
+	<p>option.description</p>
+<% end %>
+<% if option.selectable_options == nil or option.selectable_options == {} or !JSON.parse(option.selectable_options).is_a? Hash %>
+	<p>Selectable options have not been set correctly.</p>
+<% else %>
+	<% JSON.parse(option.selectable_options).each_with_index do |kv, index| %>
+		<label><input type="checkbox" name="<%= "#{param_prefix}[#{option.id}]" %>" id="<%= "customization-option-#{option.id}-#{index}" %>" value="<%= kv[1] %>" class="customization"> <%= kv[0] %></label><br>
+	<% end %>
+<% end %>

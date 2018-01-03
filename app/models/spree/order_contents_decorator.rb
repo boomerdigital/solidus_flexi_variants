@@ -33,10 +33,6 @@ Spree::OrderContents.class_eval do
       line_item.price = variant.price_in(order.currency).amount + offset_price
     end
 
-    if line_item.new_record?
-      create_order_stock_locations(line_item, options[:stock_location_quantities])
-    end
-
     line_item.target_shipment = options[:shipment]
     line_item.save!
     line_item

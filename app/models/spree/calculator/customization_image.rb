@@ -16,7 +16,7 @@ module Spree
     def create_options
       # This calculator knows that it needs one CustomizableOption named customization_image
       [
-       CustomizableProductOption.create(name: "customization_image", presentation: "Customization Image")
+       CustomizableProductOption.create(name: "customization_image", presentation: "Customization Image", data_type: "file")
       ]
     end
 

@@ -28,21 +28,18 @@
     <table class="table index" id='customizable_product_options' data-hook>
       <thead>
         <tr data-hook="customizable_product_options_header">
+          <th><%= Spree.t("id") %></th>
           <th><%= Spree.t("name") %><span class="required">*</span></th>
           <th><%= Spree.t("presentation") %><span class="required">*</span></th>
           <th><%= Spree.t("description") %></th>
+          <th><%= Spree.t("data_type") %></th>
+          <th><%= Spree.t("selectable_options") %></th>
           <th class="actions"></th>
         </tr>
       </thead>
       <tbody id="customizable_product_options">
-        <% if @product_customization_type.calculator.type == "Spree::Calculator::NoCharge" %>
-          <%= f.fields_for :customizable_product_options do |customizable_form| %>
-            <%= render partial: "customizable_product_option_fields", locals: { f: customizable_form, editable: true } %>
-          <% end %>
-        <% else %>
-          <%= f.fields_for :customizable_product_options do |customizable_form| %>
-            <%= render partial: "customizable_product_option_fields", locals: { f: customizable_form, editable: false } %>
-          <% end %>
+        <%= f.fields_for :customizable_product_options do |customizable_form| %>
+          <%= render partial: "customizable_product_option_fields", locals: { f: customizable_form, editable: true } %>
         <% end %>
       </tbody>
     </table>

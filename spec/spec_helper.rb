@@ -8,7 +8,7 @@ require File.expand_path('../dummy/config/environment.rb',  __FILE__)
 
 require 'rspec/rails'
 require 'database_cleaner'
-require 'factory_girl'
+require 'factory_bot'
 require 'ffaker'
 require 'shoulda-matchers'
 require 'pry'
@@ -39,10 +39,13 @@ Dir[File.join(File.dirname(__FILE__), 'factories/*.rb')].each { |f| require f }
 
 
 RSpec.configure do |config|
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
   config.include Spree::TestingSupport::Preferences
   config.include Spree::TestingSupport::UrlHelpers
   config.include Spree::TestingSupport::ControllerRequests, type: :controller
+
+  config.filter_run focus: true
+  config.run_all_when_everything_filtered = true
 
   config.infer_spec_type_from_file_location!
   config.mock_with :rspec

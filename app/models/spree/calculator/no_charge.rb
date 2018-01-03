@@ -12,7 +12,7 @@ module Spree
     end
 
     def create_options
-      # This calculator knows that it needs one CustomizableOption named amount
+      # This calculator doesn't come with any customizable options. Create your own through the UI
       [
       ]
     end
