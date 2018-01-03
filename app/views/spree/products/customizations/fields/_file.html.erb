@@ -2,4 +2,4 @@
 <% if option.description %>
 	<p><%= option.description %></p>
 <% end %>
-<%= file_field_tag "#{param_prefix}[#{option.id}][customization_image]", class: "customization", id: "customize-option-#{option.id}" %>
+<%= file_field_tag "#{param_prefix}[#{option.id}][customization_image]", class: "customization", id: "customization-option-#{option.id}" %>
