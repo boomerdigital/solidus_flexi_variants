@@ -24,6 +24,7 @@ FactoryBot.define do
   factory :customized_product_option, class: Spree::CustomizedProductOption do
     transient do
       product_option_name 'inscription'
+      data_type 'string'
     end
 
     product_customization { |p| p.association(:product_customization) }
@@ -80,8 +81,10 @@ FactoryBot.define do
   factory :product_customization_type, class: Spree::ProductCustomizationType do
     sequence(:name) { |n| "Product Customization Type ##{n} - #{Kernel.rand(9999)}" }
     sequence(:presentation) { |n| "Product Customization Type Presentation ##{n} - #{Kernel.rand(9999)}" }
-    trait :no_charge_calculator do
-      calculator { |p| p.association(:no_charge_calculator) }
+    calculator { |p| p.association(:no_charge_calculator) }
+
+    trait :customization_image_calculator do
+      calculator { |p| p.association(:customization_image_calculator) }
     end
     trait :engraving_calculator do
       calculator { |p| p.association(:engraving_calculator) }
