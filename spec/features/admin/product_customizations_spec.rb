@@ -11,7 +11,7 @@ describe 'Product Customizations', :js, type: :feature do
     end
 
     def create_product_customization_type
-      create(:product_customization_type, :no_charge_calculator, name: 'text', presentation: 'Text')
+      create(:product_customization_type, name: 'text', presentation: 'Text')
     end
 
     def go_to_product_customization

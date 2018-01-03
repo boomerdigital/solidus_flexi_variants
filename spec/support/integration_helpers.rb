@@ -57,7 +57,7 @@ module IntegrationHelpers
   end
 
   def setup_customization_type_and_options(product, option_type_name)
-    prod_cust_type = create(:product_customization_type, :no_charge_calculator)
+    prod_cust_type = create(:product_customization_type)
     customizatable_option = case option_type_name
     when "string"
       create(:customizable_product_option, :string_type, product_customization_type: prod_cust_type)
