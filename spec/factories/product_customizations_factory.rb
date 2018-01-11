@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :product_customization, class: Spree::ProductCustomization do
     product_customization_type { |p| p.association(:product_customization_type) }
     line_item { |p| p.association(:line_item) }
