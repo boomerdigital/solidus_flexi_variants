@@ -37,5 +37,23 @@ module Spree
     def cost_money
       Spree::Money.new(cost_price, currency: currency)
     end
+
+    def add_customizations(product_customizations_values)
+      self.product_customizations = product_customizations_values
+      product_customizations_values.each { |product_customization| product_customization.line_item = self }
+      product_customizations_values.map(&:save) # it is now safe to save the customizations we built
+      customizations_offset_price = product_customizations_values.map {|product_customization| product_customization.price(variant)}.compact.sum
+      return customizations_offset_price
+    end
+
+    def add_ad_hoc_option_values(ad_hoc_option_value_ids)
+      product_option_values = ad_hoc_option_value_ids.map do |cid|
+        Spree::AdHocOptionValue.find(cid) if cid.present?
+      end.compact
+      self.ad_hoc_option_values = product_option_values
+      ad_hoc_options_offset_price = product_option_values.map(&:price_modifier).compact.sum
+      return ad_hoc_options_offset_price
+    end
+
   end
 end
