@@ -56,6 +56,33 @@ module IntegrationHelpers
     end
   end
 
+  def setup_product_customization_type_and_options(product, calculator_name)
+    cpos = []
+    case calculator_name
+    when "amount_times_constant"
+      prod_cust_type = create(:product_customization_type, :amount_times_constant)
+      cpos << create(:customizable_product_option, product_customization_type: prod_cust_type)
+    when "customization_image"
+      prod_cust_type = create(:product_customization_type, :customization_image)
+      cpos << create(:customizable_product_option, product_customization_type: prod_cust_type)
+    when "engraving"
+      prod_cust_type = create(:product_customization_type, :engraving)
+      cpos << create(:customizable_product_option, product_customization_type: prod_cust_type)
+    when "product_area"
+      prod_cust_type = create(:product_customization_type, :product_area)
+      cpos << create(:customizable_product_option, product_customization_type: prod_cust_type)
+      cpos << create(:customizable_product_option, product_customization_type: prod_cust_type)
+    when "no_charge"
+      prod_cust_type = create(:product_customization_type)
+      cpos << create(:customizable_product_option, product_customization_type: prod_cust_type)
+    else
+      raise "unknown calculator_name"
+    end
+
+    product.product_customization_types << prod_cust_type
+    return prod_cust_type, cpos
+  end
+
   def setup_option_types_plus_ad_hoc_option_type_size(product)
     size_option_type = create(:option_type, name: 'size', presentation: 'Size')
     size_ad_hoc_option_type = create(:ad_hoc_option_type, option_type_id: size_option_type.id, product_id: product.id, position: 1)

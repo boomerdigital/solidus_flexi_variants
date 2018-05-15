@@ -13,6 +13,20 @@ module Spree
       h
     end
 
+    def render_partial_for_customization_type(product_customization_type, product_calc_name)
+      lookup = ActionView::LookupContext.new(ActionController::Base.view_paths, {formats: [:html]})
+      param_prefix = "product_customizations[#{product_customization_type.id}]"
+      partial_name = "spree/products/customizations/customization_type/#{product_customization_type.name}"
+      partial_name2 =  "spree/products/customizations/calculator_type/#{product_calc_name}"
+      if lookup.exists?(partial_name,nil,true)
+        render partial: partial_name, locals: {product_customization_type: product_customization_type, param_prefix: param_prefix}
+      elsif lookup.exists?(partial_name2,nil,true)
+        render partial: partial_name2, locals: {product_customization_type: product_customization_type, param_prefix: param_prefix}
+      else
+        render partial: "spree/products/customizations/custom_partial_not_found", locals: {product_customization_type: product_customization_type, param_prefix: param_prefix}
+      end
+    end
+
     private
 
     def validation_attributes(option)

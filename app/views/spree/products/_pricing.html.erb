@@ -62,10 +62,11 @@
       return (input - 0) == input && input.length > 0;
     }
 
-    function compute_variant_price_diff(base_price) {
+    function compute_variant_price_diff(base_price, context) {
+      context = context || document;
       var variant_price = 0;
 
-      $("#product-variants input[type='radio']:checked").each (function() {
+      $("#product-variants input[type='radio']:checked", context).each (function() {
         variant_price = variant_price_map[$(this).val()];
       });
 
@@ -77,11 +78,12 @@
 
     }
 
-    function compute_configuration_price() {
+    function compute_configuration_price(context) {
+      context = context || document;
       var configuration_price = 0;
 
       // for selects or checkboxes
-      $("select.ad-hoc-option-select, input:checked.ad-hoc-option-select").each(function() {
+      $("select.ad-hoc-option-select, input:checked.ad-hoc-option-select", context).each(function() {
         // the prompt: 'None' in the select tag yields an empty string, which I can't use in the price calcuation
         var val = $(this).val();
 
@@ -101,11 +103,12 @@
       return configuration_price;
     }
 
-    function compute_customization_price() {
+    function compute_customization_price(context) {
+      context = context || document;
       var price = 0;
 
       // for selects or checkboxes
-      $(".customization_price").each(function() {
+      $(".customization_price", context).each(function() {
         var val = $(this).val();
 
         if (isNumeric(val)) {
@@ -116,7 +119,18 @@
       return price;
     }
 
-    function updatePrice() {
+    function updatePrice(cartFormContext) {
+      // cartFormContext is optional argument to make sure price is only updated in the correct product cart-form
+      if (cartFormContext === undefined){
+        // fallback to old functionality if cartFormContext is not given
+        updatePriceWithoutCartContext();
+      } else {
+        updatePriceWithCartContext(cartFormContext);
+      }
+      
+    }
+
+    function updatePriceWithoutCartContext(){
       var cur_variant_price_diff = compute_variant_price_diff(base_price);
       var cur_configuration_price = compute_configuration_price();
       var cur_customization_price = compute_customization_price();
@@ -124,6 +138,15 @@
 
       var region = $.formatCurrency.getRegionFromCurrency("<%= current_pricing_options.currency %>");
       $('.price.selling').text(cur_price.toFixed(2)).formatCurrency({region: region});
+    }
+
+    function updatePriceWithCartContext(cartFormContext){
+      var cur_variant_price_diff = compute_variant_price_diff(base_price, cartFormContext);
+      var cur_configuration_price = compute_configuration_price(cartFormContext);
+      var cur_customization_price = compute_customization_price(cartFormContext);
+      var cur_price = base_price + cur_variant_price_diff + cur_configuration_price + cur_customization_price;
+      var region = $.formatCurrency.getRegionFromCurrency("<%= current_pricing_options.currency %>");
+      $('.price.selling', cartFormContext).text(cur_price.toFixed(2)).formatCurrency({region: region});
     }
 
     //]]>

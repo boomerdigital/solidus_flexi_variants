@@ -13,5 +13,6 @@ calculator_type/_my_calc.html.erb
 
 The partials are selected in this order is
 
-1) customization_type
-2) calculator_type
+1) /customization_type/_my_calc.html.erb
+2) /calculator_type/_my_calc.html.erb
+3) _custom_partial_not_found.html.erb
