@@ -31,18 +31,18 @@ module SolidusFlexiVariants
     end
 
     initializer "spree.flexi_variants.assets.precompile" do |app|
-        app.config.assets.precompile += ['spree/frontend/solidus_flexi_variants_exclusions.js','spree/backend/orders/flexi_configuration.js'] # ,'spree/frontend/spree-flexi-variants.*' # removed for now until we need the styles
+      app.config.assets.precompile += ['spree/frontend/solidus_flexi_variants_exclusions.js','spree/backend/orders/flexi_configuration.js'] # ,'spree/frontend/spree-flexi-variants.*' # removed for now until we need the styles
     end
 
     initializer "spree.flexi_variants.register.calculators" do |app|
-      app.config.spree.calculators.add_class('product_customization_types') unless app.config.spree.calculators.respond_to?(:product_customization_types)
+      app.config.spree.calculators.singleton_class.add_class_set('product_customization_types') unless app.config.spree.calculators.respond_to?(:product_customization_types)
       app.config.spree.calculators.product_customization_types.concat([
-                                                                    Spree::Calculator::Engraving,
-                                                                    Spree::Calculator::AmountTimesConstant,
-                                                                    Spree::Calculator::ProductArea,
-                                                                    Spree::Calculator::CustomizationImage,
-                                                                    Spree::Calculator::NoCharge
-                                                                   ])
+        Spree::Calculator::Engraving,
+        Spree::Calculator::AmountTimesConstant,
+        Spree::Calculator::ProductArea,
+        Spree::Calculator::CustomizationImage,
+        Spree::Calculator::NoCharge
+      ])
     end
   end
 end
