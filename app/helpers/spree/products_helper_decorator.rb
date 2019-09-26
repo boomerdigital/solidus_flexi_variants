@@ -5,20 +5,20 @@ module Spree
     # help w/ formatting the validation string
     # this method will likely be removed as we move everything to the client
     def custom_html_options(option)
-      h = {style: "float: left;", class: "customization #{validation_classes(option)}"}
+      h = { style: "float: left;", class: "customization #{validation_classes(option)}" }
       va = validation_attributes(option)
 
       h.merge! va if va
+
       h
     end
 
     private
 
     def validation_attributes(option)
-
       return unless option.data_validation
 
-      validation_hash=Hash.new
+      validation_hash = Hash.new
 
       data_validation = JSON.parse option.data_validation
 
@@ -29,7 +29,6 @@ module Spree
 
       # min, max represent the current list of available jquery validation rules that can be specified inline
       [:min, :max].each do |m|
-
         next unless data_validation[m.to_s]
 
         # need to pull the value from the calculator via the preference name provided
@@ -44,10 +43,9 @@ module Spree
     def validation_classes(option)
       return unless option.data_validation
 
-      validation_str=[]
+      validation_str = []
 
       data_validation = JSON.parse option.data_validation
-
 
       # handle data type first
       validation_str << case data_validation["type"]
@@ -82,14 +80,14 @@ module Spree
 
     def ad_hoc_option_value_presentation_with_price_modifier(ah_ov)
       presentation_string = ah_ov.price_modifier.nil? ?
-                             ah_ov.option_value.presentation :
-                             "#{ah_ov.option_value.presentation} #{price_change_text(ah_ov)}"
+        ah_ov.option_value.presentation :
+        "#{ah_ov.option_value.presentation} #{price_change_text(ah_ov)}"
     end
 
     def calculator_name(product_customization_type)
       product_customization_type.calculator.class.name.demodulize.underscore rescue ""
     end
-
-    Spree::ProductsHelper.prepend(self)
   end
 end
+
+::Spree::ProductsHelper.include(Spree::ProductsHelperDecorator)
