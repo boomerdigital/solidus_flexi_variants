@@ -72,6 +72,6 @@ module Spree
       end
     end
 
-    Spree::OrderContents.prepend self
+    ::Spree::OrderContents.prepend(self)
   end
 end

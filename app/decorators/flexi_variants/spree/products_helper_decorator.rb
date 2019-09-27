@@ -87,7 +87,7 @@ module Spree
     def calculator_name(product_customization_type)
       product_customization_type.calculator.class.name.demodulize.underscore rescue ""
     end
+
+    ::Spree::ProductsHelper.include(self)
   end
 end
-
-::Spree::ProductsHelper.include(Spree::ProductsHelperDecorator)
