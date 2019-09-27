@@ -1,5 +1,5 @@
 module Spree
-  module OrderDecorator
+  module FlexiOrderDecorator
     private
 
     # produces a list of [customizable_product_option.id,value] pairs for subsequent comparison
