@@ -1,6 +1,5 @@
 module Spree
   module OrderContentsDecorator
-
     private
 
     def add_to_line_item(variant, quantity, options = {})
