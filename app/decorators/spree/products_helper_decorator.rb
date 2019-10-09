@@ -4,7 +4,6 @@ module Spree
 
     def self.prepended(base)
       base.module_eval do
-
         # help w/ formatting the validation string
         # this method will likely be removed as we move everything to the client
         def custom_html_options(option)
@@ -93,6 +92,6 @@ module Spree
       end
     end
 
-    ::Spree::ProductsHelper.include(self)
+    Spree::ProductsHelper.prepend(self)
   end
 end
