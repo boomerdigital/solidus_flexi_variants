@@ -4,8 +4,12 @@ rvm:
   - 2.3.1
 addons:
   chrome: stable
+services:
+  postgresql
+  mysql
 before_script:
   - bundle
+  - psql -c 'create database solidus_test;' -U postgres
 script:
   - bundle exec rake
 env:
