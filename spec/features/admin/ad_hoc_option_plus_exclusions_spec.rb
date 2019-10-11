@@ -69,6 +69,9 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', :js, type: :featur
 
       #test adding an option type
       find('#new_ahot_link').trigger('click')
+
+      wait_for_ajax
+
       find('.fa.fa-plus', match: :first).click
       click_on('Update')
       expect(all('#ad_hoc_option_types tr').length).to eq(2)
