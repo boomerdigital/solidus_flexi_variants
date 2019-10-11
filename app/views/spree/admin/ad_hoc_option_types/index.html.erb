@@ -3,7 +3,7 @@
 <% content_for :page_actions do %>
   <% if can?(:edit, Spree::Product) %>
     <li id="new_ahot_link">
-      <%= button_link_to Spree.t(:add_ad_hoc_option_type), new_admin_product_ad_hoc_option_type_path(@product), { remote: :true } %>
+      <%= link_to Spree.t(:add_ad_hoc_option_type), new_admin_product_ad_hoc_option_type_path(@product), { remote: :true } %>
     </li>
   <% end %>
 <% end %>

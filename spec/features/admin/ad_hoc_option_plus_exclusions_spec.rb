@@ -10,7 +10,7 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', :js, type: :featur
     let(:color_select) { "ad_hoc_option_type[#{test_product.ad_hoc_option_types.first.id}]" }
     let(:size_select) { "ad_hoc_option_type[#{test_product.ad_hoc_option_types.last.id}]" }
 
-    it 'ad hoc option types add/removes the associated option value when clicked' do
+    it 'ad hoc option types add/removes the associated option value when clicked', js: true do
       setup_option_types_plus_ad_hoc_option_type_color(test_product)
       go_to_product_page
       go_to_edit_ad_hoc_option_type
