@@ -1,6 +1,5 @@
 module Spree
-  ProductsHelper.module_eval do
-
+  module AdhocProductsHelper
     require 'json'
 
     # help w/ formatting the validation string
@@ -90,5 +89,6 @@ module Spree
     def calculator_name(product_customization_type)
       product_customization_type.calculator.class.name.demodulize.underscore rescue ""
     end
+
   end
 end

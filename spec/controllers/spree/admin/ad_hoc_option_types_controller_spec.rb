@@ -9,7 +9,14 @@ RSpec.describe Spree::Admin::AdHocOptionTypesController, type: :controller do
 
 
   describe '#index' do
-    subject { get :index, params: { product_id: product.slug } }
+    let(:request_params) {
+      {
+        product_id: product.slug,
+      }
+    }
+    subject {
+      get :index, params: request_params
+    }
 
     it 'lists all product option types' do
       subject
@@ -36,7 +43,14 @@ RSpec.describe Spree::Admin::AdHocOptionTypesController, type: :controller do
     let(:option_value) { create(:option_value) }
 
     context 'on success' do
-      subject { get :add_option_value, params: { product_id: product.slug, id: option_type.id, option_value_id: option_value.id } }
+      let(:request_params) {
+        {
+          product_id: product.slug,
+          id: option_type.id,
+          option_value_id: option_value.id,
+        }
+      }
+      subject { get :add_option_value, params: request_params }
       it 'creates an AdHocOptionValue' do
         expect{ subject }.to change(Spree::AdHocOptionValue, :count).by(1)
       end

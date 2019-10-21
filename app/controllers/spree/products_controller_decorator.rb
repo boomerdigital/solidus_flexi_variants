@@ -1,5 +1,9 @@
 module Spree
-  ProductsController.class_eval do
+  module ProductsControllerDecorator
+    def self.prepended(base)
+      base.helper AdhocProductsHelper
+    end
+
     def customize
       # copied verbatim from 0.60 ProductsController#show, except that I changed id to product_id on following line
       # TODO: is there another way?  e.g. render action: "show", template: "customize" ?
@@ -29,5 +33,7 @@ module Spree
 
       respond_with(@product)
     end
+
+    Spree::ProductsController.prepend(self)
   end
 end

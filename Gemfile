@@ -9,6 +9,7 @@ group :test, :development do
 end
 
 if branch == 'master' || branch >= "v2.0"
+  gem "rails", '< 6.0.0'
   gem "rails-controller-testing", group: :test
 else
   gem "rails", '~> 4.2.7' # workaround for bundler resolution issue

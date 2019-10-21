@@ -20,7 +20,14 @@ RSpec.describe Spree::OrderContents do
       end
 
       it 'updates the order total price to include the price modifier' do
-        expect{ subject.add(variant, 1, { product_customizations: [product_customization], customization_price: 5.00 }) }.to change { order.total }.from(0.00).to(10.00)
+        expect {
+          subject.add(variant, 1, {
+                        product_customizations: [product_customization],
+                        customization_price: 5.00
+                      })
+        }.to change {
+          order.total
+        }.from(0.00).to(10.00)
       end
 
       it 'attaches product customizations to the line item' do

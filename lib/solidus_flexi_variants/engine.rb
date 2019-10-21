@@ -35,7 +35,10 @@ module SolidusFlexiVariants
     end
 
     initializer "spree.flexi_variants.register.calculators" do |app|
-      app.config.spree.calculators.add_class('product_customization_types') unless app.config.spree.calculators.respond_to?(:product_customization_types)
+      unless app.config.spree.calculators.respond_to?(:product_customization_types)
+        app.config.spree.calculators.singleton_class.send(:add_class_set, 'product_customization_types')
+      end
+
       app.config.spree.calculators.product_customization_types.concat([
                                                                     Spree::Calculator::Engraving,
                                                                     Spree::Calculator::AmountTimesConstant,
