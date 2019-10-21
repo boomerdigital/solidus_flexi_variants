@@ -18,4 +18,6 @@ end
 gem 'pg', '~> 0.21'
 gem 'mysql2', '~> 0.4.10'
 
+gem 'thor', '~> 0.20.0'
+
 gemspec
