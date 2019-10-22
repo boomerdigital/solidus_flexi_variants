@@ -44,7 +44,7 @@ module IntegrationHelpers
 
   def accept_alert(&block)
     page.accept_confirm do
-      yield
+      block.call
     end
     sleep 1.second
   end
