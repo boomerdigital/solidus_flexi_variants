@@ -58,7 +58,7 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', :js, type: :featur
       #test deleting a option type
 
       accept_alert do
-        find('.fa.fa-trash').click
+        find('.fa.fa-trash', match: :first).click
       end
 
       expect(page).to have_content(/Ad Hoc Option Type Deleted/i)
@@ -86,7 +86,7 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', :js, type: :featur
       expect(all('#listing_ad_hoc_variant_exclusions tr').length).to eq(2)
 
       accept_alert do
-        find('.fa.fa-trash').click
+        find('.fa.fa-trash', match: :first).click
       end
 
       expect(page).to have_content(/Exclusion Removed/i)
