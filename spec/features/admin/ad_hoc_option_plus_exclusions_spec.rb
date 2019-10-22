@@ -35,9 +35,7 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', :js, type: :featur
         find('.fa.fa-plus', match: :first).click
       end
 
-      wait_for_ajax
-
-      expect(all('#option_values tr').length).to eq(3)
+      expect(page).to have_selector('#option_values tr', minimum: 3)
 
       #check the update
       check 'ad_hoc_option_type_is_required'
@@ -63,9 +61,7 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', :js, type: :featur
       accept_alert
       expect(page).to have_content(/Ad Hoc Option Type Deleted/i)
 
-      wait_for_ajax
-
-      expect(all('#ad_hoc_option_types tbody tr').length).to eq(0)
+      expect(page).to_not have_selector('#ad_hoc_option_values tr')
     end
 
     ### ad hoc variant exclusions
@@ -80,7 +76,7 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', :js, type: :featur
       expect(page).to have_content(/No Ad hoc variant exclusion found/i)
       click_on('Add One')
 
-      wait_for_ajax
+      expect(page).to have_text('Choose a value for option type', minimum: 2)
 
       select "red", from: color_select
       select "small", from: size_select
