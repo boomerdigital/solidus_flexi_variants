@@ -15,7 +15,7 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', :js, type: :featur
       go_to_product_page
       go_to_edit_ad_hoc_option_type
 
-      expect(all('#option_values tr').length).to eq(3)
+      expect(page).to have_selector('#option_values tr', minimum: 3)
 
       accept_alert do
         find('.fa.fa-trash', match: :first).click
@@ -23,13 +23,14 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', :js, type: :featur
 
       expect(page).to have_content(/Ad Hoc Option Value Deleted/i)
 
-      expect(all('#option_values tr').length).to eq(2)
+      expect(page).to have_selector('#option_values tr', maximum: 2)
 
       go_to_product_page
 
       go_to_edit_ad_hoc_option_type
 
-      expect(all('#option_values tr').length).to eq(2)
+      expect(page).to have_selector('#option_values tr', maximum: 2)
+
       #add
       within('#available_option-values') do
         find('.fa.fa-plus', match: :first).click
@@ -83,7 +84,7 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', :js, type: :featur
       select "red", from: color_select
       select "small", from: size_select
       click_on('Create')
-      expect(all('#listing_ad_hoc_variant_exclusions tr').length).to eq(2)
+      expect(page).to have_selector('#listing_ad_hoc_variant_exclusions tr', minimum: 2)
 
       accept_alert do
         find('.fa.fa-trash', match: :first).click
