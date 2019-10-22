@@ -18,7 +18,7 @@ describe 'Ad Hoc Variant Exclusions', :js, type: :feature do
     end
 
     it 'hides small when red is selected' do
-      wait_for_ajax
+      expect(page).to have_select(color_select, options: ['None', 'Red', 'Green', 'Blue'])
 
       select('Red', from: color_select)
       expect(page).to_not have_select(size_select, options: ['Small'])

@@ -42,8 +42,10 @@ module IntegrationHelpers
     expect(page).to have_content(/Editing Option Type/i)
   end
 
-  def accept_alert
-    page.accept_confirm
+  def accept_alert(&block)
+    page.accept_confirm do
+      yield
+    end
     sleep 1.second
   end
 

@@ -17,9 +17,9 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', :js, type: :featur
 
       expect(all('#option_values tr').length).to eq(3)
 
-      find('.fa.fa-trash', match: :first).click
-
-      accept_alert
+      accept_alert do
+        find('.fa.fa-trash', match: :first).click
+      end
 
       expect(page).to have_content(/Ad Hoc Option Value Deleted/i)
 
@@ -56,9 +56,11 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', :js, type: :featur
       click_on('Cancel')
       expect(page).to have_content(/Add Option Types/i)
       #test deleting a option type
-      find('.fa.fa-trash').click
 
-      accept_alert
+      accept_alert do
+        find('.fa.fa-trash').click
+      end
+
       expect(page).to have_content(/Ad Hoc Option Type Deleted/i)
 
       expect(page).to_not have_selector('#ad_hoc_option_values tr')
@@ -82,9 +84,10 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', :js, type: :featur
       select "small", from: size_select
       click_on('Create')
       expect(all('#listing_ad_hoc_variant_exclusions tr').length).to eq(2)
-      find('.fa.fa-trash').click
 
-      accept_alert
+      accept_alert do
+        find('.fa.fa-trash').click
+      end
 
       expect(page).to have_content(/Exclusion Removed/i)
     end

@@ -25,8 +25,7 @@ describe 'Product Customizations', :js, type: :feature do
       go_to_product_customization
 
       click_on('Add One')
-      wait_for_ajax
-      expect(all('#available_product_customization_types tbody tr').length).to eq(1)
+      expect(page).to have_selector('#available_product_customization_types tbody tr', minimum: 1)
       find('.fa.fa-plus.icon_link', match: :first).click
       expect(all('#selected-customization-types tbody tr').length).to eq(1)
       #test remove
