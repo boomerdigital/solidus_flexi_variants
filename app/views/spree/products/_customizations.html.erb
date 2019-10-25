@@ -4,7 +4,7 @@
 
   <div id="product-customizations">
     <div class= 'col-sm-12'>
-      <h3 class="product-section-title"><%=Spree.t(:customizations) %></h3>
+      <h3 class="product-section-title"><%=I18n.t(:customizations, scope: :spree) %></h3>
     </div>
     <ul class="list-group list-unstyled">
       <% @product.product_customization_types.group_by{ |x| calculator_name(x) }.each do |product_customization_grouped_by_calc_type| %>
@@ -24,7 +24,7 @@
               <%= render partial: partial_name, locals: {product_customization_type: product_customization_type, param_prefix: param_prefix} %>
             <% else %>
               <li>
-                <div class="col-md-<%= Spree.t(:variant_col_size) %> form-group">
+                <div class="col-md-<%= I18n.t(:variant_col_size, scope: :spree) %> form-group">
                   <p><%= product_customization_type.description  %></p>
                   <% product_customization_type.customizable_product_options.each_with_index do |customizable_product_option, index| %>
                     <h5 class="presentation-for-customizable-product-option">

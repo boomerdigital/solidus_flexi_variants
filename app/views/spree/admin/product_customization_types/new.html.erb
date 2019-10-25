@@ -1,5 +1,5 @@
 <% content_for :page_title do %>
-  <%=Spree.t(:new_product_customization_type) %>
+  <%= I18n.t(:new_product_customization_type, scope: :spree) %>
 <% end %>
 
 <%= render 'spree/shared/error_messages', target: @product_customization_type  %>

@@ -1,11 +1,11 @@
 <% content_for :page_title do %>
-  <%= Spree.t(:editing_resource, resource: Spree::ProductCustomizationType.model_name.human) %> <span class="green">"<%= @product_customization_type.name %>"</span>
+  <%= I18n.t(:editing_resource, scope: :spree, resource: Spree::ProductCustomizationType.model_name.human) %> <span class="green">"<%= @product_customization_type.name %>"</span>
 <% end %>
 
 <% if @product_customization_type.calculator.type == "Spree::Calculator::NoCharge" %>
   <% content_for :page_actions do %>
     <span id="customizable_product_options_value" data-hook>
-      <%= link_to Spree.t(:add_option_value), "javascript:;", :'data-target' => "tbody#customizable_product_options", class: 'fa fa-add btn-success spree_add_fields'  %>
+      <%= link_to I18n.t(:add_option_value, scope: :spree), "javascript:;", :'data-target' => "tbody#customizable_product_options", class: 'fa fa-add btn-success spree_add_fields'  %>
     </span>
   <% end %>
 <% end %>
@@ -16,13 +16,13 @@
   <fieldset>
     <%= render partial: "form", locals: { f: f } %>
 
-    <h3><%= Spree.t("customizable_product_options") %></h3>
+    <h3><%= I18n.t("spree.customizable_product_options") %></h3>
     <table class="table index" id='customizable_product_options' data-hook>
       <thead>
         <tr data-hook="customizable_product_options_header">
-          <th><%= Spree.t("name") %><span class="required">*</span></th>
-          <th><%= Spree.t("presentation") %><span class="required">*</span></th>
-          <th><%= Spree.t("description") %></th>
+          <th><%= I18n.t("spree.name") %><span class="required">*</span></th>
+          <th><%= I18n.t("spree.presentation") %><span class="required">*</span></th>
+          <th><%= I18n.t("spree.description") %></th>
           <th class="actions"></th>
         </tr>
       </thead>

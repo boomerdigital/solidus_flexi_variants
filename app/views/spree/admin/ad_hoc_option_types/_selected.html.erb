@@ -4,9 +4,9 @@
   <table class="table index" id='ad_hoc_option_types' data-hook>
     <thead>
       <tr data-hook="ad_hoc_option_types_header">
-        <th><%= Spree.t("name") %></th>
-        <th><%= Spree.t("presentation") %></th>
-        <th><%= Spree.t("required") %></th>
+        <th><%= I18n.t("spree.name") %></th>
+        <th><%= I18n.t("spree.presentation") %></th>
+        <th><%= I18n.t("spree.required") %></th>
         <th class="actions"></th>
       </tr>
     </thead>
@@ -32,7 +32,7 @@
   </table>
 <% else %>
   <div class="alert alert-info no-objects-found">
-    <%= Spree.t(:no_resource, resource: Spree::AdHocOptionType.model_name.human(count: :other)) %>,
-    <%= link_to Spree.t(:add_one), spree.new_admin_product_ad_hoc_option_type_path(@product), remote: :true %>!
+    <%= I18n.t(:no_resource, scope: :spree, resource: Spree::AdHocOptionType.model_name.human(count: :other)) %>,
+    <%= link_to I18n.t(:add_one, scope: :spree), spree.new_admin_product_ad_hoc_option_type_path(@product), remote: :true %>!
   </div>
 <% end %>
