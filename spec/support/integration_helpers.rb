@@ -9,7 +9,7 @@ module IntegrationHelpers
     fill_in 'spree_user[email]', with: user.email
     fill_in 'spree_user[password]', with: options[:password]
     click_button 'Login'
-    page.should_not have_content 'Login'
+    expect(page).to_not have_content 'Login'
   end
 
   def go_to_product_page
@@ -48,7 +48,7 @@ module IntegrationHelpers
   end
 
   def wait_for_ajax
-    Timeout.timeout(Capybara.default_wait_time) do
+    Timeout.timeout(Capybara.default_max_wait_time) do
       loop do
         active = page.evaluate_script('jQuery.active')
         break if active == 0

@@ -50,10 +50,10 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', :js, type: :featur
       find('#ad_hoc_option_types .fa.fa-edit', match: :first).click
 
 
-      expect find('#ad_hoc_option_type_is_required').should be_checked
+      expect(find('#ad_hoc_option_type_is_required')).to be_checked
       within("#ad_hoc_option_type .option_value", match: :first) do
         expect(page).to have_selector("input[value='1.0']")
-        expect find('#ad_hoc_option_type_ad_hoc_option_values_attributes_0_selected').should be_checked
+        expect(find('#ad_hoc_option_type_ad_hoc_option_values_attributes_0_selected')).to be_checked
       end
       click_on('Cancel')
       expect(page).to have_content(/Add Option Types/i)

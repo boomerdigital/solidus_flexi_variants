@@ -6,7 +6,7 @@
 
   <% content_for :page_actions do %>
     <li id="new_exclusion_link">
-      <%= button_link_to Spree.t(:new_ad_hoc_variant_exclusion), spree.new_admin_product_ad_hoc_variant_exclusion_url(@product), { remote: :true } %>
+      <%= link_to Spree.t(:new_ad_hoc_variant_exclusion), spree.new_admin_product_ad_hoc_variant_exclusion_url(@product), { remote: :true } %>
     </li>
   <% end %>
 
