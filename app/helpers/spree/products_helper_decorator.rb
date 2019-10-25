@@ -84,7 +84,7 @@ module Spree
     def ad_hoc_option_value_presentation_with_price_modifier(ah_ov)
       presentation_string = ah_ov.price_modifier.nil? ?
                              ah_ov.option_value.presentation :
-                             "#{ah_ov.option_value.presentation} #{price_change_text(ah_ov)}"
+                             [ah_ov.option_value.presentation, price_change_text(ah_ov)].join(' ').strip
     end
 
     def calculator_name(product_customization_type)

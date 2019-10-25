@@ -45,11 +45,15 @@ describe 'Ad Hoc Variant Exclusions', :js, type: :feature do
 
 
     it 'selecting Red changes price' do
-      expect(find('.price.selling').has_content?('$12.99')).to be_truthy
+      within(:css, '.price.selling') do
+        expect(page).to have_content('12.99')
+      end
 
       select('Red', from: color_select)
 
-      expect(find('.price.selling').has_content?('$17.99')).to be_truthy
+      within(:css, '.price.selling') do
+        expect(page).to have_content('17.99')
+      end
     end
   end
 end

@@ -34,10 +34,11 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'ffaker'
   s.add_development_dependency 'jazz_fingers'
   s.add_development_dependency 'launchy'
-  s.add_development_dependency 'poltergeist'
   s.add_development_dependency 'puma'
   s.add_development_dependency 'sass-rails'
+  s.add_development_dependency 'selenium-webdriver'
   s.add_development_dependency 'shoulda-matchers'
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'webdrivers'
 end
