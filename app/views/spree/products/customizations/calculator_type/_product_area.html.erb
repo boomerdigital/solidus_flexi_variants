@@ -8,12 +8,14 @@
   <%= javascript_tag do %>
     function product_area_keyup() {
       var text_field = $(this);
+      // find cart form that we are operating on so we can pass it to the updatePrice function
+      var cartForm = $(text_field).closest("#cart-form");
 
       delay(function(){
 
         // update the hidden price field for this file input
         $(text_field).parent().parent().find(".customization_price").val(calculate_product_area_price(text_field));
-        updatePrice();
+        updatePrice(cartForm);
       }, 1000 ); // delay
     }; // keyup
 

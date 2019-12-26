@@ -52,5 +52,22 @@ FactoryBot.define do
     sequence(:presentation) { |n| "Product Customization Type Presentation ##{n} - #{Kernel.rand(9999)}" }
 
     calculator { |p| p.association(:no_charge_calculator) }
+
+    trait :customization_image do
+      calculator { |p| p.association(:customization_image_calculator) }
+    end
+
+    trait :product_area do
+      calculator { |p| p.association(:product_area_calculator) }
+    end
+
+    trait :amount_times_constant do
+      calculator { |p| p.association(:amount_times_constant_calculator) }
+    end
+
+    trait :engraving do
+      calculator { |p| p.association(:engraving_calculator) }
+    end
+
   end
 end

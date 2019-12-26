@@ -1,20 +1,28 @@
 <%# render the (possibly shared) calculator %>
+<%# set id of the input field for the calculator. %>
 <% cust_dom_id = "amount_times_constant_input_#{product_customization_type.customizable_product_options.first.id}" %>
+<%# render a partial that includes the javascript required to perform the price calculation. This JS is added to the bottom of the body tag according to /overrides/add_flexi_variants_javascript_body_yield.rb %>
 <%= render partial: "spree/products/customizations/calculator/#{calculator_name(product_customization_type)}", locals: {calculator: product_customization_type.calculator} %>
-<%# add the 'change' listener for this particular file input, which will make use of the calculator above %>
 
+
+<%# add the 'change' listener for this particular file input, which will make use of the calculator above %>
+<%# This JS, like the calculation function above, goes in content_for :flexi_variants_body_js %>
 <%= content_for :flexi_variants_body_js do %>
   <%= javascript_tag do %>
     $(document).on('keyup', '#<%= cust_dom_id %>', function(e) {
 
+      
       var text_field = $(this);
+      // find cart form that we are operating on so we can pass it to the updatePrice function
+      var cartForm = $(text_field).closest("#cart-form");
 
       delay(function(){
 
         // update the hidden price field for this file input
         $(text_field).siblings(".customization_price").val(calculate_amount_times_constant_price(text_field));
 
-        updatePrice();
+        // pass an cart form object to updatePrice to make sure we scope only this object
+        updatePrice(cartForm);
       }, 1000 ); // delay
     }); // keyup
   <% end %>

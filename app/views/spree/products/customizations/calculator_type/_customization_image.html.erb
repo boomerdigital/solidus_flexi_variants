@@ -7,10 +7,12 @@
   <%= javascript_tag do %>
     $(document).on('change', '#<%= cust_dom_id %>', function(e) {
 
+      // find cart form that we are operating on so we can pass it to the updatePrice function
+      var cartForm = $(this).closest("#cart-form");
       // update the hidden price field for this file input
       $(this).siblings(".customization_price").val(calculate_customization_image_price(this));
 
-      updatePrice();
+      updatePrice(cartForm);
 
     }); // change()
   <% end %>
