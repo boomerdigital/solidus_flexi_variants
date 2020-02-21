@@ -21,18 +21,6 @@ require 'spree/testing_support/factories'
 require 'spree/testing_support/url_helpers'
 require 'spree/testing_support/order_walkthrough'
 
-require 'capybara/rspec'
-require 'capybara-screenshot/rspec'
-require 'capybara/poltergeist'
-Capybara.register_driver(:poltergeist) do |app|
-  Capybara::Poltergeist::Driver.new app, {
-    phantomjs_options: %w[--ssl-protocol=any --ignore-ssl-errors=true --load-images=false],
-    timeout: 90
-  }
-end
-Capybara.javascript_driver = :poltergeist
-Capybara.default_max_wait_time = 10
-
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
 Dir[File.join(File.dirname(__FILE__), 'factories/*.rb')].each { |f| require f }
 

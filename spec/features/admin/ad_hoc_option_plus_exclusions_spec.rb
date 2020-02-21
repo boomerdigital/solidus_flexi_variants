@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', :js, type: :feature do
+describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', js: true, type: :feature do
   describe 'test add links / remove links / add options values / remove options values/ update and cancel buttons' do
     extend Spree::TestingSupport::AuthorizationHelpers::Request
     include IntegrationHelpers
@@ -15,29 +15,31 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', :js, type: :featur
       go_to_product_page
       go_to_edit_ad_hoc_option_type
 
-      expect(all('#option_values tr').length).to eq(3)
+      expect(page).to have_selector('#option_values tr', minimum: 3)
 
-      find('.fa.fa-trash', match: :first).click
+      within('#option_values') do
+        find('.fa-trash', match: :first).click
+      end
 
       accept_alert
 
       expect(page).to have_content(/Ad Hoc Option Value Deleted/i)
 
-      expect(all('#option_values tr').length).to eq(2)
+      expect(page).to have_selector('#option_values tr', maximum: 2)
 
       go_to_product_page
 
       go_to_edit_ad_hoc_option_type
 
-      expect(all('#option_values tr').length).to eq(2)
+      expect(page).to have_selector('#option_values tr', maximum: 2)
       #add
       within('#available_option-values') do
-        find('.fa.fa-plus', match: :first).click
+        find('.fa-plus', match: :first).click
       end
 
       wait_for_ajax
 
-      expect(all('#option_values tr').length).to eq(3)
+      expect(page).to have_selector('#option_values tr', minimum: 3)
 
       #check the update
       check 'ad_hoc_option_type_is_required'
@@ -47,31 +49,33 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', :js, type: :featur
       end
       click_on('Update')
       expect(page).to have_content(/Ad hoc option type "color" has been successfully updated!/i)
-      find('#ad_hoc_option_types .fa.fa-edit', match: :first).click
+      find('#ad_hoc_option_types .fa-edit', match: :first).click
 
 
-      expect find('#ad_hoc_option_type_is_required').should be_checked
+      expect(find('#ad_hoc_option_type_is_required')).to be_checked
       within("#ad_hoc_option_type .option_value", match: :first) do
         expect(page).to have_selector("input[value='1.0']")
-        expect find('#ad_hoc_option_type_ad_hoc_option_values_attributes_0_selected').should be_checked
+        expect(find('#ad_hoc_option_type_ad_hoc_option_values_attributes_0_selected')).to be_checked
       end
       click_on('Cancel')
       expect(page).to have_content(/Add Option Types/i)
       #test deleting a option type
-      find('.fa.fa-trash').click
+      within('#ad_hoc_option_types') do
+        find('.fa-trash').click
+      end
 
       accept_alert
       expect(page).to have_content(/Ad Hoc Option Type Deleted/i)
 
       wait_for_ajax
 
-      expect(all('#ad_hoc_option_types tbody tr').length).to eq(0)
+      expect(page).to_not have_selector('#ad_hoc_option_types tbody tr')
 
       #test adding an option type
       click_on('Add Ad Hoc Option Type')
-      find('.fa.fa-plus', match: :first).click
+      find('.fa-plus', match: :first).click
       click_on('Update')
-      expect(all('#ad_hoc_option_types tr').length).to eq(2)
+      expect(page).to have_selector('#ad_hoc_option_types tr', count: 2)
     end
 
     ### ad hoc variant exclusions
@@ -92,7 +96,7 @@ describe 'Ad Hoc Option Values / Ad Hoc Variant Exclusions ', :js, type: :featur
       select "small", from: size_select
       click_on('Create')
       expect(all('#listing_ad_hoc_variant_exclusions tr').length).to eq(2)
-      find('.fa.fa-trash').click
+      find('.fa-trash').click
 
       accept_alert
 

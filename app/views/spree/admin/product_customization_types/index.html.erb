@@ -1,15 +1,15 @@
-<% content_for(:page_title, Spree.t("product_customization_types")) %>
+<% content_for(:page_title, I18n.t("spree.product_customization_types")) %>
 <% content_for(:page_actions) do %>
-  <%= button_link_to Spree.t("new_product_customization_type"), spree.new_admin_product_customization_type_url, class: 'btn-success', icon: 'add', id: 'new_product_customization_type_link' %>
+  <%= link_to I18n.t("spree.new_product_customization_type"), spree.new_admin_product_customization_type_url, class: 'fa fa-add btn-success', id: 'new_product_customization_type_link' %>
 <% end %>
 
 <% if @product_customization_types.any? %>
   <table class="table" id='product_customization_types' data-hook>
     <thead>
       <tr data-hook="product_customization_types_header">
-        <th><%= Spree.t("name") %></th>
-        <th><%= Spree.t("presentation") %></th>
-        <th><%= Spree.t("description") %></th>
+        <th><%= I18n.t("spree.name") %></th>
+        <th><%= I18n.t("spree.presentation") %></th>
+        <th><%= I18n.t("spree.description") %></th>
         <th class="actions"></th>
       </tr>
     </thead>
@@ -29,7 +29,7 @@
   </table>
 <% else %>
   <div class="alert alert-info no-objects-found">
-    <%= Spree.t(:no_resource, resource: Spree::ProductCustomization.model_name.human(count: :other)) %>,
-    <%= link_to Spree.t(:add_one), spree.new_admin_product_customization_type_url %>!
+    <%= I18n.t(:no_resource, scope: :spree, resource: Spree::ProductCustomization.model_name.human(count: :other)) %>,
+    <%= link_to I18n.t(:add_one, scope: :spree), spree.new_admin_product_customization_type_url %>!
   </div>
 <% end %>

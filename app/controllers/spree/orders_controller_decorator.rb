@@ -18,7 +18,7 @@ Spree::OrdersController.class_eval do
         error = e.record.errors.full_messages.join(", ")
       end
     else
-      error = Spree.t(:please_enter_reasonable_quantity)
+      error = I18n.t(:please_enter_reasonable_quantity, scope: :spree)
     end
 
     if error

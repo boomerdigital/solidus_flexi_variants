@@ -39,17 +39,21 @@ describe 'Ad Hoc Variant Exclusions', :js, type: :feature do
     end
 
     it 'has all ad hoc option values listed' do
-      expect(page).to have_select(color_select, options: ['None', 'Red (Add $5.00)', 'Blue', 'Green'])
+      expect(page).to have_select(color_select, options: ['None', 'Red  (Add $5.00)', 'Blue', 'Green'])
       expect(page).to have_select(size_select, options: ['None', 'Small', 'Medium', 'Large'])
     end
 
 
     it 'selecting Red changes price' do
-      expect(find('.price.selling').has_content?('$12.99')).to be_truthy
+      within(:css, '.price.selling') do
+        expect(page).to have_content('12.99')
+      end
 
       select('Red', from: color_select)
 
-      expect(find('.price.selling').has_content?('$17.99')).to be_truthy
+      within(:css, '.price.selling') do
+        expect(page).to have_content('17.99')
+      end
     end
   end
 end

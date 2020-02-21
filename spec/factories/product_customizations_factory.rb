@@ -23,7 +23,7 @@ FactoryBot.define do
 
   factory :customized_product_option, class: Spree::CustomizedProductOption do
     transient do
-      product_option_name 'inscription'
+      product_option_name { 'inscription' }
     end
 
     product_customization { |p| p.association(:product_customization) }

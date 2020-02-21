@@ -56,7 +56,8 @@ Spree::OrderContents.class_eval do
         ad_hoc_options_offset_price = line_item.add_ad_hoc_option_values(ad_hoc_option_value_ids)
       end
 
-      line_item.price = variant.price_in(order.currency).amount + customizations_offset_price + ad_hoc_options_offset_price
+      price_options = Spree::Config.pricing_options_class.new(currency: order.currency)
+      line_item.price = variant.price_for(price_options).to_d + customizations_offset_price + ad_hoc_options_offset_price
 
       return line_item
   end

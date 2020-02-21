@@ -4,7 +4,7 @@
 
 <% content_for :page_actions do %>
   <li>
-    <%= button_link_to Spree.t(:back_to_ad_hoc_option_types_list), admin_product_ad_hoc_option_types_url(@product) %>
+    <%= link_to I18n.t(:back_to_ad_hoc_option_types_list, scope: :spree), admin_product_ad_hoc_option_types_url(@product) %>
   </li>
 <% end %>
 
@@ -13,15 +13,15 @@
   <fieldset>
     <%= render partial: "form", locals: { f: f } %>
 
-    <h3><%= Spree.t("option_values") %></h3>
+    <h3><%= I18n.t("spree.option_values") %></h3>
     <table class="index sortable table" id='ad_hoc_option_type' data-sortable-link="<%= update_positions_admin_product_ad_hoc_option_type_ad_hoc_option_values_url(@product, @ad_hoc_option_type) %>" data-hook>
       <thead>
         <tr data-hook="ad_hoc_option_type_header">
-          <th><%= Spree.t("name") %></th>
-          <th><%= Spree.t("display") %></th>
-          <th><%= Spree.t("price_modifier") %></th>
-          <th><%= Spree.t("cost_price_modifier") %></th>
-          <th><%= Spree.t("selected_by_default") %></th>
+          <th><%= I18n.t("spree.name") %></th>
+          <th><%= I18n.t("spree.display") %></th>
+          <th><%= I18n.t("spree.price_modifier") %></th>
+          <th><%= I18n.t("spree.cost_price_modifier") %></th>
+          <th><%= I18n.t("spree.selected_by_default") %></th>
           <th class='actions'></th>
         </tr>
       </thead>
@@ -32,7 +32,7 @@
           <% end %>
         <% else %>
           <tr>
-            <td colspan="6"><%= Spree.t("none") %></td>
+            <td colspan="6"><%= I18n.t("spree.none") %></td>
           </tr>
         <% end %>
       </tbody>

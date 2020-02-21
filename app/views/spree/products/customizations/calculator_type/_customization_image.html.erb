@@ -16,7 +16,7 @@
   <% end %>
 <% end %>
 
-<div class="col-md-<%= Spree.t(:variant_col_size) %> form-group">
+<div class="col-md-<%= I18n.t(:variant_col_size, scope: :spree) %> form-group">
   <% option = product_customization_type.customizable_product_options.first %>
   <div class="form-for-customizable-product-option custom-image">
     <p><%= product_customization_type.description  %></p>
@@ -24,7 +24,7 @@
     <%= file_field_tag "#{param_prefix}[#{product_customization_type.customizable_product_options.first.id}][customization_image]", class: "customization", id: cust_dom_id %>
     <p><%= option.description %></p>
     <%# the price is stored here on change, and later collected by the product-wide updatePrice() %>
-    <%= link_to Spree.t("reset"),"" %>
+    <%= link_to I18n.t("spree.reset"),"" %>
     <%= hidden_field_tag "customization_price", "0", class: "customization_price" %>
   </div>
 </div>

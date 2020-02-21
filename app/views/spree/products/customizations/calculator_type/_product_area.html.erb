@@ -22,7 +22,7 @@
   <% end %>
 <% end %>
 
-<div class="col-md-<%= Spree.t(:variant_col_size) %> form-group">
+<div class="col-md-<%= I18n.t(:variant_col_size, scope: :spree) %> form-group">
   <% option = product_customization_type.customizable_product_options.first %>
   <p><%= product_customization_type.description  %></p>
   <h5><%= option.presentation %></h5>

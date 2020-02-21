@@ -2,7 +2,7 @@
 
 <% content_for(:page_actions) do %>
   <li>
-    <%= button_link_to Spree.t("add_product_customization_type"), spree.available_admin_product_product_customization_types_url(@product), remote: true, class: 'btn-success', icon: 'plus' %>
+    <%= link_to I18n.t("spree.add_product_customization_type"), spree.available_admin_product_product_customization_types_url(@product), remote: true, class: 'fa fa-plus btn-success' %>
   </li>
 <% end %>
 
