@@ -92,6 +92,6 @@ module Spree
       end
     end
 
-    Spree::ProductsHelper.prepend(self)
+    Spree::ProductsHelper.prepend(self) unless Spree::ProductsHelper.ancestors.include?(self)
   end
 end

@@ -5,5 +5,5 @@ module Spree
     end
   end
 
-  ::Spree::OptionType.prepend(self)
+  ::Spree::OptionType.prepend(self) unless ::Spree::OptionType.ancestors.include?(self)
 end

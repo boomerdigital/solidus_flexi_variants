@@ -33,6 +33,6 @@ module Spree
       existing_ad_hoc_opt_vals.pluck(:id).sort == new_ad_hoc_opt_vals.map(&:to_i).sort
     end
 
-    ::Spree::Order.prepend(self)
+    ::Spree::Order.prepend(self) unless ::Spree::Order.ancestors.include?(self)
   end
 end

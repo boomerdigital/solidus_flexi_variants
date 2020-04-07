@@ -5,6 +5,6 @@ module Spree
       base.has_many :ad_hoc_option_values, dependent: :destroy
     end
 
-    ::Spree::OptionValue.prepend(self)
+    ::Spree::OptionValue.prepend(self) unless ::Spree::OptionValue.ancestors.include?(self)
   end
 end

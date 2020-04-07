@@ -30,6 +30,6 @@ module Spree
       respond_with(@product)
     end
 
-    ::Spree::ProductsController.prepend(self)
+    ::Spree::ProductsController.prepend(self) unless ::Spree::ProductsController.ancestors.include?(self)
   end
 end
