@@ -4,6 +4,18 @@ module Spree
       base.has_many :ad_hoc_option_values_line_items, dependent: :destroy
       base.has_many :ad_hoc_option_values, through: :ad_hoc_option_values_line_items
       base.has_many :product_customizations, dependent: :destroy
+
+      base.validate :product_customization_should_exist_if_required
+    end
+
+    def product_customization_should_exist_if_required
+      existing_product_customization_types = product_customizations.map(&:product_customization_type).uniq
+      product.product_customization_types.each do |product_customization_type|
+        if product_customization_type.is_required? &&
+           !existing_product_customization_types.include?(product_customization_type)
+          errors.add(:order, "missing required product customization: #{product_customization_type.name.capitalize}")
+        end
+      end
     end
 
     def options_text # REFACTOR
@@ -18,7 +30,7 @@ module Spree
         product_customizations.each do |customization|
           price_adjustment = (customization.price == 0) ? "" : " (#{Spree::Money.new(customization.price).to_s})"
           customization_type_text = "#{customization.product_customization_type.presentation}#{price_adjustment}"
-          opts_text = customization.customized_product_options.map { |opt| opt.display_text }.join(', ')
+          opts_text = customization.customized_product_options.map(&:display_text).join(', ')
           str << customization_type_text + ": #{opts_text}"
         end
 
