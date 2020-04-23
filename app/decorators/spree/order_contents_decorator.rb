@@ -4,7 +4,7 @@ module Spree
 
     def add_to_line_item(variant, quantity, options = {})
       ### overrides existing Spree::OrderContents private method
-      line_item = grab_line_item_by_variant(variant, false, options)
+      line_item = grab_line_item_by_variant(variant, false, options) unless options[:product_customizations].empty?
 
       line_item ||= order.line_items.new(
         quantity: 0,
