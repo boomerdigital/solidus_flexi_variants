@@ -2,9 +2,18 @@ module Spree
   module OrderContentsDecorator
     private
 
+    def has_required_product_customizations?(variant, options)
+      existing_product_customization_types = options[:product_customizations] ? options[:product_customizations].map(&:product_customization_type).uniq : []
+      variant.product.product_customization_types.each do |product_customization_type|
+        return false if product_customization_type.is_required? && !existing_product_customization_types.include?(product_customization_type)
+      end
+      
+      true
+    end
+
     def add_to_line_item(variant, quantity, options = {})
       ### overrides existing Spree::OrderContents private method
-      line_item = grab_line_item_by_variant(variant, false, options) unless options[:product_customizations].empty?
+      line_item = grab_line_item_by_variant(variant, false, options) if has_required_product_customizations?(variant, options)
 
       line_item ||= order.line_items.new(
         quantity: 0,
