@@ -11,23 +11,21 @@ module SolidusFlexiVariants
 
     def self.activate
       Dir.glob(File.join(File.dirname(__FILE__), "../../app/decorators/**/*_decorator*.rb")) do |c|
-        Rails.configuration.cache_classes ? require_dependency(c) : load(c)
+        require_dependency(c)
       end
 
       Spree::Core::Environment::Calculators.class_eval do
         attr_accessor :product_customization_types
       end
+
+      Spree::Order.register_line_item_comparison_hook(:product_customizations_match)
+      Spree::Order.register_line_item_comparison_hook(:ad_hoc_option_values_match)
     end
 
     config.to_prepare &method(:activate).to_proc
 
     initializer "spree.flexi_variants.preferences", after: "spree.environment" do |app|
       SolidusFlexiVariants::Config = Spree::FlexiVariantsConfiguration.new
-    end
-
-    initializer "spree.flexi_variants.register.line_item_comparision_hooks" do |app|
-      Spree::Order.register_line_item_comparison_hook(:product_customizations_match)
-      Spree::Order.register_line_item_comparison_hook(:ad_hoc_option_values_match)
     end
 
     initializer "spree.flexi_variants.assets.precompile" do |app|

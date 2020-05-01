@@ -42,6 +42,6 @@ module Spree
       params[:options][:customization_price] = params[:customization_price] if params[:customization_price]
     end
 
-    ::Spree::OrdersController.prepend(self) unless ::Spree::OrdersController.ancestors.include?(self)
+    ::Spree::OrdersController.prepend(self)
   end
 end

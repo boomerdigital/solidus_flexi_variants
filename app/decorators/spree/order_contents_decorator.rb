@@ -80,6 +80,6 @@ module Spree
       end
     end
 
-    ::Spree::OrderContents.prepend(self) unless ::Spree::OrderContents.ancestors.include?(self)
+    ::Spree::OrderContents.prepend(self)
   end
 end

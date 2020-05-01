@@ -24,6 +24,6 @@ module Spree
       end
     end
 
-    ::Spree::Product.prepend(self) unless ::Spree::Product.ancestors.include?(self)
+    ::Spree::Product.prepend(self)
   end
 end

@@ -69,6 +69,6 @@ module Spree
       return ad_hoc_options_offset_price
     end
 
-    ::Spree::LineItem.prepend(self) unless ::Spree::LineItem.ancestors.include?(self)
+    ::Spree::LineItem.prepend(self)
   end
 end
