@@ -1,5 +1,8 @@
 module SolidusFlexiVariants
   class Engine < Rails::Engine
+    include SolidusSupport::EngineExtensions
+
+    isolate_namespace Spree
     engine_name 'solidus_flexi_variants'
 
     config.autoload_paths += %W(#{config.root}/lib)
@@ -9,22 +12,9 @@ module SolidusFlexiVariants
       g.test_framework :rspec
     end
 
-    def self.activate
-      Dir.glob(File.join(File.dirname(__FILE__), "../../app/decorators/**/*_decorator*.rb")) do |c|
-        require_dependency(c)
-      end
-
-      Spree::Core::Environment::Calculators.class_eval do
-        attr_accessor :product_customization_types
-      end
-
-      Spree::Order.register_line_item_comparison_hook(:product_customizations_match)
-      Spree::Order.register_line_item_comparison_hook(:ad_hoc_option_values_match)
-    end
-
-    config.to_prepare &method(:activate).to_proc
-
     initializer "spree.flexi_variants.preferences", after: "spree.environment" do |app|
+      require "spree/flexi_variants_configuration"
+
       SolidusFlexiVariants::Config = Spree::FlexiVariantsConfiguration.new
     end
 
@@ -35,11 +25,11 @@ module SolidusFlexiVariants
     initializer "spree.flexi_variants.register.calculators" do |app|
       app.config.spree.calculators.singleton_class.add_class_set('product_customization_types') unless app.config.spree.calculators.respond_to?(:product_customization_types)
       app.config.spree.calculators.product_customization_types.concat([
-        Spree::Calculator::Engraving,
-        Spree::Calculator::AmountTimesConstant,
-        Spree::Calculator::ProductArea,
-        Spree::Calculator::CustomizationImage,
-        Spree::Calculator::NoCharge
+        "Spree::Calculator::Engraving",
+        "Spree::Calculator::AmountTimesConstant",
+        "Spree::Calculator::ProductArea",
+        "Spree::Calculator::CustomizationImage",
+        "Spree::Calculator::NoCharge"
       ])
     end
   end
